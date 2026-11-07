@@ -112,12 +112,12 @@ impl SnowGolemEntity {
 
 impl Mob for SnowGolemEntity {
     fn mob_write_nbt(&self, nbt: &mut NbtCompound) {
-        nbt.put_bool("LithumMC", self.has_pumpkin());
+        nbt.put_bool("Pumpkin", self.has_pumpkin());
     }
 
     fn mob_read_nbt(&self, nbt: &NbtCompound) {
-        if let Some(lithummc) = nbt.get_bool("LithumMC") {
-            self.set_has_pumpkin(lithummc);
+        if let Some(pumpkin) = nbt.get_bool("Pumpkin") {
+            self.set_has_pumpkin(pumpkin);
         }
     }
 
