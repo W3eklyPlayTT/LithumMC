@@ -19,6 +19,14 @@ Copy-Item lithum.example.toml lithum.toml
 target\release\lithum-server.exe
 ```
 
+For Windows with Java 21+, the packaged launcher is `dist/LithumServer.jar`:
+
+```powershell
+java -jar .\dist\LithumServer.jar
+```
+
+This JAR bundles the Windows Rust executable and starts it from the current folder, where Lithum reads or creates `lithum.toml`. The JAR is a Windows launcher package; the server itself remains a native Rust executable.
+
 On first run, Lithum creates `lithum.toml` with defaults. Set `server.address`, `server.port`, `server.motd`, `server.max_players`, `server.max_connections`, `server.worker_threads`, and `metrics.refresh_interval_ms` there. `worker_threads = 0` uses the machine's available CPU count. The connection cap bounds concurrent TCP clients.
 
 Console commands: `status`, `tps`, `help`, `stop`. The metrics display reports measured tick rate, process memory and current connections. The memory bar is scaled in 128 MiB increments; it is a visual guide, not a configured memory limit.
