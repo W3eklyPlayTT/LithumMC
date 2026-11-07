@@ -2,7 +2,7 @@
 
 Lithum is a Minecraft Java server built in Rust. This first playable build packages the real game server, world handling, chunk loading, and a sandboxed WebAssembly plugin runtime. The server engine is based on [Pumpkin](https://github.com/Pumpkin-MC/Pumpkin); the Lithum name and package do not mean the engine was rewritten from scratch.
 
-## Run the JAR on Windows
+## Run the JAR
 
 1. Install Java 21 or newer.
 2. Put `LithumServer.jar` in a new, empty server folder.
@@ -10,18 +10,20 @@ Lithum is a Minecraft Java server built in Rust. This first playable build packa
 4. The first start creates `lithum.toml` and the world files. Review the configuration and restart the server.
 5. Connect with a Java Edition client for Minecraft 26.3 at `localhost:25565`.
 
-The JAR is a Java launcher that extracts and starts the bundled Windows x64 Rust server. It is not a Java reimplementation and this first JAR does not run on Linux or macOS. The source can also be built as a native server executable.
+The JAR is a small Java launcher that extracts and starts the bundled Rust server. A locally packaged JAR contains Windows x64 and Linux x64 runtimes; the Linux hosting artifact contains the Linux x64 runtime. It is not a Java reimplementation and does not run on macOS or ARM hosts. The source can also be built as a native server executable.
 
 ## Pelican and Pterodactyl hosting
 
-Pelican and Pterodactyl run game servers in Linux Docker containers, so use the Linux executable rather than the Windows JAR. The `Build Lithum Linux server` workflow creates a Linux x86_64 executable artifact after changes are pushed to `main` (or when started manually from GitHub Actions).
+Use the Linux x86_64 `LithumServer.jar` artifact with a Java 21 container. The `Build Lithum Linux server` workflow creates it after changes are pushed to `main` (or when started manually from GitHub Actions). To use the custom Lithum Egg:
 
-1. Download the `LithumServer-linux-x86_64` artifact from a successful workflow run and extract it.
-2. Import [`deploy/egg-lithum.json`](deploy/egg-lithum.json) through the panel administrator's custom Eggs page. Choose the Debian Docker image for that panel.
-3. Create a Lithum server with a Java Edition allocation, then upload `lithum-server-linux-x86_64` into the server's root folder.
+1. Download `LithumServer.jar` from the `LithumServer-linux-x86_64` artifact in a successful workflow run.
+2. Ask a panel administrator to import [`deploy/egg-lithum.json`](deploy/egg-lithum.json), then create a Lithum server and select the Java 21 image.
+3. Upload `LithumServer.jar` to the server's root folder.
 4. Start the server. The Egg creates `lithum.toml` with the panel's allocated port before first launch; Lithum fills in the remaining defaults and creates the world files.
 
-Importing an Egg requires panel administrator access. If the host does not allow custom Eggs, ask its administrator to add this Egg or use a host that allows a custom Linux executable.
+If custom Eggs are unavailable, use a Java 21 Minecraft egg and set its server JAR filename to `LithumServer.jar` (or rename the uploaded file to the filename configured by that egg). Its startup command must run `java -jar <jar-filename>` and the server must use the panel's allocated port.
+
+Importing an Egg requires panel administrator access. If the host does not allow Java 21 or a configurable JAR startup command, ask its administrator to enable one.
 
 ## Plugins
 

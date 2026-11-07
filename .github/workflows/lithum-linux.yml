@@ -9,6 +9,7 @@ on:
       - Cargo.lock
       - crates/**
       - .github/workflows/lithum-linux.yml
+      - jar-launcher/**
   workflow_dispatch:
 
 permissions:
@@ -34,11 +35,21 @@ jobs:
       - name: Build optimized server
         run: cargo build --locked --release --package pumpkin --bin lithum-server
 
-      - name: Package Linux executable
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Package Linux executable and hosting JAR
         run: |
           mkdir -p dist
           install -m 755 target/release/lithum-server dist/lithum-server-linux-x86_64
           sha256sum dist/lithum-server-linux-x86_64 > dist/lithum-server-linux-x86_64.sha256
+          mkdir -p target/lithum-jar-stage/native
+          javac -d target/lithum-jar-stage jar-launcher/LithumLauncher.java
+          cp target/release/lithum-server target/lithum-jar-stage/native/lithum-server-linux-x86_64
+          jar --create --file dist/LithumServer.jar --manifest jar-launcher/MANIFEST.MF -C target/lithum-jar-stage .
+          sha256sum dist/LithumServer.jar > dist/LithumServer.jar.sha256
 
       - uses: actions/upload-artifact@v7
         with:
@@ -46,4 +57,6 @@ jobs:
           path: |
             dist/lithum-server-linux-x86_64
             dist/lithum-server-linux-x86_64.sha256
+            dist/LithumServer.jar
+            dist/LithumServer.jar.sha256
           retention-days: 90

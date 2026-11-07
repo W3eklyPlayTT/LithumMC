@@ -2,29 +2,64 @@ package dev.lithum;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-/** Starts the bundled Windows build of the Lithum Rust server. */
+/** Starts the bundled native Lithum Rust server for the current platform. */
 public final class LithumLauncher {
     private LithumLauncher() {}
 
     public static void main(String[] args) {
         try {
-            Path extractionDirectory = Files.createTempDirectory("lithum-server-");
-            extractionDirectory.toFile().deleteOnExit();
-            Path server = extractionDirectory.resolve("lithum-server.exe");
+            String osName = System.getProperty("os.name", "").toLowerCase(Locale.ROOT);
+            String architecture = System.getProperty("os.arch", "").toLowerCase(Locale.ROOT);
+            String resourceName;
+            String executableName;
 
-            try (InputStream bundledServer = LithumLauncher.class.getResourceAsStream(
-                    "/native/lithum-server.exe")) {
+            if ((osName.contains("linux"))
+                    && (architecture.equals("amd64") || architecture.equals("x86_64"))) {
+                resourceName = "/native/lithum-server-linux-x86_64";
+                executableName = "lithum-server-linux-x86_64";
+            } else if (osName.contains("windows")
+                    && (architecture.equals("amd64") || architecture.equals("x86_64"))) {
+                resourceName = "/native/lithum-server.exe";
+                executableName = "lithum-server.exe";
+            } else {
+                throw new IOException(
+                        "This JAR supports Windows x86_64 and Linux x86_64. Detected "
+                                + osName + " " + architecture + ".");
+            }
+
+            Path workingDirectory = Path.of(System.getProperty("user.dir"));
+            Path extractionDirectory = Files.createTempDirectory(workingDirectory, ".lithum-server-");
+            extractionDirectory.toFile().deleteOnExit();
+            Path server = extractionDirectory.resolve(executableName);
+
+            try (InputStream bundledServer = LithumLauncher.class.getResourceAsStream(resourceName)) {
                 if (bundledServer == null) {
-                    throw new IOException("The bundled Lithum server executable is missing.");
+                    throw new IOException("Bundled server for " + osName + " is missing.");
                 }
                 Files.copy(bundledServer, server);
             }
             server.toFile().deleteOnExit();
+            if (osName.contains("linux")) {
+                try {
+                    Files.setPosixFilePermissions(server, Set.of(
+                            PosixFilePermission.OWNER_READ,
+                            PosixFilePermission.OWNER_WRITE,
+                            PosixFilePermission.OWNER_EXECUTE));
+                } catch (UnsupportedOperationException unsupported) {
+                    if (!server.toFile().setExecutable(true, true) && !server.toFile().canExecute()) {
+                        throw new IOException("Could not mark the bundled Lithum server executable.");
+                    }
+                }
+            }
 
             ArrayList<String> command = new ArrayList<>();
             command.add(server.toAbsolutePath().toString());
@@ -34,7 +69,14 @@ public final class LithumLauncher {
                     .directory(Path.of(System.getProperty("user.dir")).toFile())
                     .inheritIO()
                     .start();
+            Thread shutdownHook = new Thread(() -> stopServer(process), "lithum-server-shutdown");
+            Runtime.getRuntime().addShutdownHook(shutdownHook);
             int exitCode = process.waitFor();
+            try {
+                Runtime.getRuntime().removeShutdownHook(shutdownHook);
+            } catch (IllegalStateException shutdownStarted) {
+                // The shutdown hook owns child cleanup when the JVM is already shutting down.
+            }
             if (exitCode != 0) {
                 System.exit(exitCode);
             }
@@ -45,6 +87,21 @@ public final class LithumLauncher {
         } catch (IOException error) {
             System.err.println("Could not start Lithum: " + error.getMessage());
             System.exit(1);
+        }
+    }
+
+    private static void stopServer(Process process) {
+        if (!process.isAlive()) {
+            return;
+        }
+        process.destroy();
+        try {
+            if (!process.waitFor(20, TimeUnit.SECONDS)) {
+                process.destroyForcibly();
+            }
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            process.destroyForcibly();
         }
     }
 }
