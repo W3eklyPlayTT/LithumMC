@@ -6,9 +6,10 @@
     clippy::large_stack_frames,
     clippy::too_many_lines
 )]
-fn build_configured_features()
--> std::collections::HashMap<lithummc_data::configured_feature::ConfiguredFeature, ConfiguredFeature>
-{
+fn build_configured_features() -> std::collections::HashMap<
+    lithummc_data::configured_feature::ConfiguredFeature,
+    ConfiguredFeature,
+> {
     use crate::block::BlockStateCodec;
     use crate::generation::block_predicate::{
         AllOfBlockPredicate, AnyOfBlockPredicate, BlockPredicate, HasSturdyFacePredicate,
@@ -3515,7 +3516,7 @@ fn build_configured_features()
                 state_provider: BlockStateProvider::Weighted(WeightedBlockStateProvider {
                     entries: vec![
                         Weighted {
-                            data: lithummc_data::Block::LITHUMMC.default_state,
+                            data: lithummc_data::Block::PUMPKIN.default_state,
                             weight: 19i32,
                         },
                         Weighted {
@@ -3642,10 +3643,10 @@ fn build_configured_features()
         }),
     );
     map.insert(
-        lithummc_data::configured_feature::ConfiguredFeature::LithumMC,
+        lithummc_data::configured_feature::ConfiguredFeature::Pumpkin,
         ConfiguredFeature::SimpleBlock(SimpleBlockFeature {
             to_place: BlockStateProvider::Simple(SimpleStateProvider {
-                state: lithummc_data::Block::LITHUMMC.default_state,
+                state: lithummc_data::Block::PUMPKIN.default_state,
             }),
             schedule_tick: None,
         }),
@@ -4971,7 +4972,8 @@ fn build_configured_features()
                                                     offset: OffsetBlocksBlockPredicate {
                                                         offset: None,
                                                     },
-                                                    tag: lithummc_data::tag::Block::MINECRAFT_CORALS,
+                                                    tag:
+                                                        lithummc_data::tag::Block::MINECRAFT_CORALS,
                                                 },
                                             ),
                                         ],
@@ -5038,7 +5040,8 @@ fn build_configured_features()
                                                     offset: OffsetBlocksBlockPredicate {
                                                         offset: None,
                                                     },
-                                                    tag: lithummc_data::tag::Block::MINECRAFT_CORALS,
+                                                    tag:
+                                                        lithummc_data::tag::Block::MINECRAFT_CORALS,
                                                 },
                                             ),
                                         ],
@@ -5105,7 +5108,8 @@ fn build_configured_features()
                                                     offset: OffsetBlocksBlockPredicate {
                                                         offset: None,
                                                     },
-                                                    tag: lithummc_data::tag::Block::MINECRAFT_CORALS,
+                                                    tag:
+                                                        lithummc_data::tag::Block::MINECRAFT_CORALS,
                                                 },
                                             ),
                                         ],
@@ -5172,7 +5176,8 @@ fn build_configured_features()
                                                     offset: OffsetBlocksBlockPredicate {
                                                         offset: None,
                                                     },
-                                                    tag: lithummc_data::tag::Block::MINECRAFT_CORALS,
+                                                    tag:
+                                                        lithummc_data::tag::Block::MINECRAFT_CORALS,
                                                 },
                                             ),
                                         ],
@@ -5239,7 +5244,8 @@ fn build_configured_features()
                                                     offset: OffsetBlocksBlockPredicate {
                                                         offset: None,
                                                     },
-                                                    tag: lithummc_data::tag::Block::MINECRAFT_CORALS,
+                                                    tag:
+                                                        lithummc_data::tag::Block::MINECRAFT_CORALS,
                                                 },
                                             ),
                                         ],

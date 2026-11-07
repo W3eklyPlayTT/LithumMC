@@ -27,8 +27,10 @@ pub trait NoiseEvaluationContext {
         xz_scale: f64,
         y_scale: f64,
     ) -> f32;
-    fn sample_interpolated_noise(&mut self, pos: &lithummc_util::math::vector3::Vector3<i32>)
-    -> f32;
+    fn sample_interpolated_noise(
+        &mut self,
+        pos: &lithummc_util::math::vector3::Vector3<i32>,
+    ) -> f32;
     fn sample_beardifier(&mut self, pos: &lithummc_util::math::vector3::Vector3<i32>) -> f32;
     fn sample_blend_alpha(&mut self, pos: &lithummc_util::math::vector3::Vector3<i32>) -> f32;
     fn sample_blend_offset(&mut self, pos: &lithummc_util::math::vector3::Vector3<i32>) -> f32;

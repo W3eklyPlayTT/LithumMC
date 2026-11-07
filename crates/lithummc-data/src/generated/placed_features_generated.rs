@@ -323,7 +323,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::BirchTall,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::BirchTall),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::BirchTall,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Object(NormalIntProvider::WeightedList(
@@ -958,7 +960,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::DiskGrass,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::DiskGrass),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::DiskGrass,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(1i32),
@@ -1076,7 +1080,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::EndIslandDecorated,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::EndIsland),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::EndIsland,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 14u32 }),
                 PlacementModifier::Count(CountPlacementModifier {
@@ -2049,116 +2055,8 @@ fn build_placed_features()
             )],
         },
     );
-    map.insert(
-        lithummc_data::placed_feature::PlacedFeature::KelpCold,
-        PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::Kelp),
-            placement: vec![
-                PlacementModifier::NoiseBasedCount(NoiseBasedCountPlacementModifier {
-                    to_count_ratio: 120i32,
-                    factor: 80f64,
-                    offset: 0f64,
-                }),
-                PlacementModifier::InSquare(SquarePlacementModifier),
-                PlacementModifier::Heightmap(HeightmapPlacementModifier {
-                    heightmap: HeightMap::OceanFloor,
-                }),
-                PlacementModifier::BlockPredicateFilter(BlockFilterPlacementModifier {
-                    predicate: BlockPredicate::AllOf(AllOfBlockPredicate {
-                        predicates: vec![
-                            BlockPredicate::MatchingBlocks(MatchingBlocksBlockPredicate {
-                                offset: OffsetBlocksBlockPredicate { offset: None },
-                                blocks: MatchingBlocksWrapper::Single(
-                                    "minecraft:water".to_string(),
-                                ),
-                            }),
-                            BlockPredicate::MatchingBlocks(MatchingBlocksBlockPredicate {
-                                offset: OffsetBlocksBlockPredicate {
-                                    offset: Some(Vector3::new(0i32, 1i32, 0i32)),
-                                },
-                                blocks: MatchingBlocksWrapper::Single(
-                                    "minecraft:water".to_string(),
-                                ),
-                            }),
-                            BlockPredicate::HasSturdyFace(HasSturdyFacePredicate {
-                                offset: OffsetBlocksBlockPredicate {
-                                    offset: Some(Vector3::new(0i32, -1i32, 0i32)),
-                                },
-                                direction: BlockDirection::Up,
-                            }),
-                            BlockPredicate::Not(NotBlockPredicate {
-                                predicate: Box::new(BlockPredicate::MatchingBlockTag(
-                                    MatchingBlockTagPredicate {
-                                        offset: OffsetBlocksBlockPredicate {
-                                            offset: Some(Vector3::new(0i32, -1i32, 0i32)),
-                                        },
-                                        tag:
-                                            lithummc_data::tag::Block::MINECRAFT_CANNOT_SUPPORT_KELP,
-                                    },
-                                )),
-                            }),
-                        ],
-                    }),
-                }),
-                PlacementModifier::Biome(BiomePlacementModifier),
-            ],
-        },
-    );
-    map.insert(
-        lithummc_data::placed_feature::PlacedFeature::KelpWarm,
-        PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::Kelp),
-            placement: vec![
-                PlacementModifier::NoiseBasedCount(NoiseBasedCountPlacementModifier {
-                    to_count_ratio: 80i32,
-                    factor: 80f64,
-                    offset: 0f64,
-                }),
-                PlacementModifier::InSquare(SquarePlacementModifier),
-                PlacementModifier::Heightmap(HeightmapPlacementModifier {
-                    heightmap: HeightMap::OceanFloor,
-                }),
-                PlacementModifier::BlockPredicateFilter(BlockFilterPlacementModifier {
-                    predicate: BlockPredicate::AllOf(AllOfBlockPredicate {
-                        predicates: vec![
-                            BlockPredicate::MatchingBlocks(MatchingBlocksBlockPredicate {
-                                offset: OffsetBlocksBlockPredicate { offset: None },
-                                blocks: MatchingBlocksWrapper::Single(
-                                    "minecraft:water".to_string(),
-                                ),
-                            }),
-                            BlockPredicate::MatchingBlocks(MatchingBlocksBlockPredicate {
-                                offset: OffsetBlocksBlockPredicate {
-                                    offset: Some(Vector3::new(0i32, 1i32, 0i32)),
-                                },
-                                blocks: MatchingBlocksWrapper::Single(
-                                    "minecraft:water".to_string(),
-                                ),
-                            }),
-                            BlockPredicate::HasSturdyFace(HasSturdyFacePredicate {
-                                offset: OffsetBlocksBlockPredicate {
-                                    offset: Some(Vector3::new(0i32, -1i32, 0i32)),
-                                },
-                                direction: BlockDirection::Up,
-                            }),
-                            BlockPredicate::Not(NotBlockPredicate {
-                                predicate: Box::new(BlockPredicate::MatchingBlockTag(
-                                    MatchingBlockTagPredicate {
-                                        offset: OffsetBlocksBlockPredicate {
-                                            offset: Some(Vector3::new(0i32, -1i32, 0i32)),
-                                        },
-                                        tag:
-                                            lithummc_data::tag::Block::MINECRAFT_CANNOT_SUPPORT_KELP,
-                                    },
-                                )),
-                            }),
-                        ],
-                    }),
-                }),
-                PlacementModifier::Biome(BiomePlacementModifier),
-            ],
-        },
-    );
+    map . insert (lithummc_data :: placed_feature :: PlacedFeature :: KelpCold , PlacedFeature { feature : Feature :: Named (lithummc_data :: configured_feature :: ConfiguredFeature :: Kelp) , placement : vec ! [PlacementModifier :: NoiseBasedCount (NoiseBasedCountPlacementModifier { to_count_ratio : 120i32 , factor : 80f64 , offset : 0f64 , }) , PlacementModifier :: InSquare (SquarePlacementModifier) , PlacementModifier :: Heightmap (HeightmapPlacementModifier { heightmap : HeightMap :: OceanFloor , }) , PlacementModifier :: BlockPredicateFilter (BlockFilterPlacementModifier { predicate : BlockPredicate :: AllOf (AllOfBlockPredicate { predicates : vec ! [BlockPredicate :: MatchingBlocks (MatchingBlocksBlockPredicate { offset : OffsetBlocksBlockPredicate { offset : None } , blocks : MatchingBlocksWrapper :: Single ("minecraft:water" . to_string ()) , }) , BlockPredicate :: MatchingBlocks (MatchingBlocksBlockPredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , 1i32 , 0i32)) } , blocks : MatchingBlocksWrapper :: Single ("minecraft:water" . to_string ()) , }) , BlockPredicate :: HasSturdyFace (HasSturdyFacePredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , - 1i32 , 0i32)) } , direction : BlockDirection :: Up , }) , BlockPredicate :: Not (NotBlockPredicate { predicate : Box :: new (BlockPredicate :: MatchingBlockTag (MatchingBlockTagPredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , - 1i32 , 0i32)) } , tag : lithummc_data :: tag :: Block :: MINECRAFT_CANNOT_SUPPORT_KELP , })) , })] , }) , }) , PlacementModifier :: Biome (BiomePlacementModifier)] , }) ;
+    map . insert (lithummc_data :: placed_feature :: PlacedFeature :: KelpWarm , PlacedFeature { feature : Feature :: Named (lithummc_data :: configured_feature :: ConfiguredFeature :: Kelp) , placement : vec ! [PlacementModifier :: NoiseBasedCount (NoiseBasedCountPlacementModifier { to_count_ratio : 80i32 , factor : 80f64 , offset : 0f64 , }) , PlacementModifier :: InSquare (SquarePlacementModifier) , PlacementModifier :: Heightmap (HeightmapPlacementModifier { heightmap : HeightMap :: OceanFloor , }) , PlacementModifier :: BlockPredicateFilter (BlockFilterPlacementModifier { predicate : BlockPredicate :: AllOf (AllOfBlockPredicate { predicates : vec ! [BlockPredicate :: MatchingBlocks (MatchingBlocksBlockPredicate { offset : OffsetBlocksBlockPredicate { offset : None } , blocks : MatchingBlocksWrapper :: Single ("minecraft:water" . to_string ()) , }) , BlockPredicate :: MatchingBlocks (MatchingBlocksBlockPredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , 1i32 , 0i32)) } , blocks : MatchingBlocksWrapper :: Single ("minecraft:water" . to_string ()) , }) , BlockPredicate :: HasSturdyFace (HasSturdyFacePredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , - 1i32 , 0i32)) } , direction : BlockDirection :: Up , }) , BlockPredicate :: Not (NotBlockPredicate { predicate : Box :: new (BlockPredicate :: MatchingBlockTag (MatchingBlockTagPredicate { offset : OffsetBlocksBlockPredicate { offset : Some (Vector3 :: new (0i32 , - 1i32 , 0i32)) } , tag : lithummc_data :: tag :: Block :: MINECRAFT_CANNOT_SUPPORT_KELP , })) , })] , }) , }) , PlacementModifier :: Biome (BiomePlacementModifier)] , }) ;
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::LakeLavaSurface,
         PlacedFeature {
@@ -2336,7 +2234,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::LushCavesVegetation,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::MossPatch),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::MossPatch,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(125i32),
@@ -3200,7 +3100,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::OreGravel,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::OreGravel),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::OreGravel,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(14i32),
@@ -3382,7 +3284,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::OreQuartzDeltas,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::OreQuartz),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::OreQuartz,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(32i32),
@@ -3401,7 +3305,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::OreQuartzNether,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::OreQuartz),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::OreQuartz,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(16i32),
@@ -3624,7 +3530,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchBerryBush,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::BerryBush),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::BerryBush,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(96i32),
@@ -3670,7 +3578,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchBerryCommon,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::BerryBush),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::BerryBush,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 32u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -3722,7 +3632,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchBerryRare,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::BerryBush),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::BerryBush,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 384u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -4207,7 +4119,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchFire,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::PatchFire),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::PatchFire,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Object(NormalIntProvider::Uniform(UniformIntProvider {
@@ -4909,7 +4823,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchLargeFern,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::LargeFern),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::LargeFern,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 5u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5119,7 +5035,7 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchPumpkin,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::LithumMC),
+            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::Pumpkin),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 300u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5272,7 +5188,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchSugarCane,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SugarCane),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SugarCane,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 6u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5363,7 +5281,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchSugarCaneBadlands,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SugarCane),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SugarCane,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 5u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5454,7 +5374,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchSugarCaneDesert,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SugarCane),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SugarCane,
+            ),
             placement: vec![
                 PlacementModifier::InSquare(SquarePlacementModifier),
                 PlacementModifier::Heightmap(HeightmapPlacementModifier {
@@ -5544,7 +5466,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchSugarCaneSwamp,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SugarCane),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SugarCane,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 3u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5635,7 +5559,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchSunflower,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::Sunflower),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::Sunflower,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 3u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5711,7 +5637,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchTallGrass,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::TallGrass),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::TallGrass,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 5u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),
@@ -5751,7 +5679,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchTallGrass2,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::TallGrass),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::TallGrass,
+            ),
             placement: vec![
                 PlacementModifier::NoiseThresholdCount(NoiseThresholdCountPlacementModifier {
                     noise_level: -0.8f64,
@@ -5796,7 +5726,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PatchWaterlily,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::Waterlily),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::Waterlily,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Constant(4i32),
@@ -5852,7 +5784,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::PileMelon,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::PileMelon),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::PileMelon,
+            ),
             placement: vec![],
         },
     );
@@ -6212,7 +6146,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::RedPoplar,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::RedPoplar),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::RedPoplar,
+            ),
             placement: vec![PlacementModifier::BlockPredicateFilter(
                 BlockFilterPlacementModifier {
                     predicate: BlockPredicate::WouldSurvive(WouldSurviveBlockPredicate {
@@ -6362,7 +6298,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::SculkVein,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SculkVein),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SculkVein,
+            ),
             placement: vec![
                 PlacementModifier::Count(CountPlacementModifier {
                     count: IntProvider::Object(NormalIntProvider::Uniform(UniformIntProvider {
@@ -6384,7 +6322,9 @@ fn build_placed_features()
     map.insert(
         lithummc_data::placed_feature::PlacedFeature::SeaPickle,
         PlacedFeature {
-            feature: Feature::Named(lithummc_data::configured_feature::ConfiguredFeature::SeaPickle),
+            feature: Feature::Named(
+                lithummc_data::configured_feature::ConfiguredFeature::SeaPickle,
+            ),
             placement: vec![
                 PlacementModifier::RarityFilter(RarityFilterPlacementModifier { chance: 16u32 }),
                 PlacementModifier::InSquare(SquarePlacementModifier),

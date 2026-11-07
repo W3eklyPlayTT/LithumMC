@@ -1,7 +1,9 @@
 /* This file is generated. Do not edit manually. */
 use crate::BlockStateId;
 use crate::tag::{RegistryKey, Taggable};
-use lithummc_util::resource_location::{FromResourceLocation, ResourceLocation, ToResourceLocation};
+use lithummc_util::resource_location::{
+    FromResourceLocation, ResourceLocation, ToResourceLocation,
+};
 use std::hash::{Hash, Hasher};
 #[derive(Clone)]
 pub struct PartialFluidState {

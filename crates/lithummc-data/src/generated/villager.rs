@@ -1376,7 +1376,7 @@ pub const TRADES_FARMER_LEVEL_1: &[VillagerTrade] = &[
 pub const TRADES_FARMER_LEVEL_2: &[VillagerTrade] = &[
     VillagerTrade {
         wants: VillagerTradeItem {
-            item: &crate::item::Item::LITHUMMC,
+            item: &crate::item::Item::PUMPKIN,
             count: 6i32,
         },
         wants_b: None,
@@ -1397,7 +1397,7 @@ pub const TRADES_FARMER_LEVEL_2: &[VillagerTrade] = &[
         },
         wants_b: None,
         gives: VillagerTradeItem {
-            item: &crate::item::Item::LITHUMMC_PIE,
+            item: &crate::item::Item::PUMPKIN_PIE,
             count: 4i32,
         },
         max_uses: 12i32,
@@ -5385,7 +5385,7 @@ pub const TRADES_WANDERING_TRADER_COMMON: &[VillagerTrade] = &[
         },
         wants_b: None,
         gives: VillagerTradeItem {
-            item: &crate::item::Item::LITHUMMC,
+            item: &crate::item::Item::PUMPKIN,
             count: 1i32,
         },
         max_uses: 16i32,
@@ -5673,7 +5673,7 @@ pub const TRADES_WANDERING_TRADER_COMMON: &[VillagerTrade] = &[
         },
         wants_b: None,
         gives: VillagerTradeItem {
-            item: &crate::item::Item::LITHUMMC_SEEDS,
+            item: &crate::item::Item::PUMPKIN_SEEDS,
             count: 1i32,
         },
         max_uses: 12i32,

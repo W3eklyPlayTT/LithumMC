@@ -16825,7 +16825,7 @@ pub mod snow_golem {
         id: TrackedId(6u8),
         r#type: MetaDataType::POSE,
     };
-    pub const DATA_LITHUMMC_ID: TrackedData = TrackedData {
+    pub const DATA_PUMPKIN_ID: TrackedData = TrackedData {
         id: TrackedId(16u8),
         r#type: MetaDataType::BYTE,
     };
@@ -16872,9 +16872,9 @@ pub mod snow_golem {
     pub const MOB_FLAGS: TrackedData = DATA_MOB_FLAGS_ID;
     pub const NO_GRAVITY: TrackedData = DATA_NO_GRAVITY;
     pub const POSE: TrackedData = DATA_POSE;
-    pub const LITHUMMC_ID: TrackedData = DATA_LITHUMMC_ID;
-    pub const DATA_LITHUMMC: TrackedData = DATA_LITHUMMC_ID;
-    pub const LITHUMMC: TrackedData = DATA_LITHUMMC_ID;
+    pub const PUMPKIN_ID: TrackedData = DATA_PUMPKIN_ID;
+    pub const DATA_PUMPKIN: TrackedData = DATA_PUMPKIN_ID;
+    pub const PUMPKIN: TrackedData = DATA_PUMPKIN_ID;
     pub const SHARED_FLAGS_ID: TrackedData = DATA_SHARED_FLAGS_ID;
     pub const DATA_SHARED_FLAGS: TrackedData = DATA_SHARED_FLAGS_ID;
     pub const SHARED_FLAGS: TrackedData = DATA_SHARED_FLAGS_ID;

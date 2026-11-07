@@ -17491,7 +17491,7 @@ pub static BLOCKS_ATTACHED_MELON_STEM: LootTable = LootTable {
     }],
     functions: &[],
 };
-pub static BLOCKS_ATTACHED_LITHUMMC_STEM: LootTable = LootTable {
+pub static BLOCKS_ATTACHED_PUMPKIN_STEM: LootTable = LootTable {
     pools: &[LootPool {
         entries: &[LootEntry {
             kind: LootEntryKind::Item("minecraft:pumpkin_seeds"),
@@ -20197,7 +20197,7 @@ pub static BLOCKS_CARTOGRAPHY_TABLE: LootTable = LootTable {
     }],
     functions: &[],
 };
-pub static BLOCKS_CARVED_LITHUMMC: LootTable = LootTable {
+pub static BLOCKS_CARVED_PUMPKIN: LootTable = LootTable {
     pools: &[LootPool {
         entries: &[LootEntry {
             kind: LootEntryKind::Item("minecraft:carved_pumpkin"),
@@ -34684,7 +34684,7 @@ pub static BLOCKS_PRISMARINE_WALL: LootTable = LootTable {
     }],
     functions: &[],
 };
-pub static BLOCKS_LITHUMMC: LootTable = LootTable {
+pub static BLOCKS_PUMPKIN: LootTable = LootTable {
     pools: &[LootPool {
         entries: &[LootEntry {
             kind: LootEntryKind::Item("minecraft:pumpkin"),
@@ -34700,7 +34700,7 @@ pub static BLOCKS_LITHUMMC: LootTable = LootTable {
     }],
     functions: &[],
 };
-pub static BLOCKS_LITHUMMC_STEM: LootTable = LootTable {
+pub static BLOCKS_PUMPKIN_STEM: LootTable = LootTable {
     pools: &[LootPool {
         entries: &[LootEntry {
             kind: LootEntryKind::Item("minecraft:pumpkin_seeds"),
@@ -42240,7 +42240,7 @@ pub static BRUSH_ARMADILLO: LootTable = LootTable {
     }],
     functions: &[],
 };
-pub static CARVE_LITHUMMC: LootTable = LootTable {
+pub static CARVE_PUMPKIN: LootTable = LootTable {
     pools: &[LootPool {
         entries: &[LootEntry {
             kind: LootEntryKind::Item("minecraft:pumpkin_seeds"),
@@ -62027,7 +62027,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ("blocks/attached_melon_stem", &BLOCKS_ATTACHED_MELON_STEM),
     (
         "blocks/attached_pumpkin_stem",
-        &BLOCKS_ATTACHED_LITHUMMC_STEM,
+        &BLOCKS_ATTACHED_PUMPKIN_STEM,
     ),
     ("blocks/azalea", &BLOCKS_AZALEA),
     ("blocks/azalea_leaves", &BLOCKS_AZALEA_LEAVES),
@@ -62196,7 +62196,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ("blocks/candle_cake", &BLOCKS_CANDLE_CAKE),
     ("blocks/carrots", &BLOCKS_CARROTS),
     ("blocks/cartography_table", &BLOCKS_CARTOGRAPHY_TABLE),
-    ("blocks/carved_pumpkin", &BLOCKS_CARVED_LITHUMMC),
+    ("blocks/carved_pumpkin", &BLOCKS_CARVED_PUMPKIN),
     ("blocks/cauldron", &BLOCKS_CAULDRON),
     ("blocks/cave_vines", &BLOCKS_CAVE_VINES),
     ("blocks/cave_vines_plant", &BLOCKS_CAVE_VINES_PLANT),
@@ -63324,8 +63324,8 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ("blocks/prismarine_slab", &BLOCKS_PRISMARINE_SLAB),
     ("blocks/prismarine_stairs", &BLOCKS_PRISMARINE_STAIRS),
     ("blocks/prismarine_wall", &BLOCKS_PRISMARINE_WALL),
-    ("blocks/lithummc", &BLOCKS_LITHUMMC),
-    ("blocks/lithummc_stem", &BLOCKS_LITHUMMC_STEM),
+    ("blocks/pumpkin", &BLOCKS_PUMPKIN),
+    ("blocks/pumpkin_stem", &BLOCKS_PUMPKIN_STEM),
     ("blocks/purple_banner", &BLOCKS_PURPLE_BANNER),
     ("blocks/purple_bed", &BLOCKS_PURPLE_BED),
     ("blocks/purple_candle", &BLOCKS_PURPLE_CANDLE),
@@ -63977,7 +63977,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ("blocks/yellow_wool_stairs", &BLOCKS_YELLOW_WOOL_STAIRS),
     ("blocks/zombie_head", &BLOCKS_ZOMBIE_HEAD),
     ("brush/armadillo", &BRUSH_ARMADILLO),
-    ("carve/lithummc", &CARVE_LITHUMMC),
+    ("carve/pumpkin", &CARVE_PUMPKIN),
     ("charged_creeper/creeper", &CHARGED_CREEPER_CREEPER),
     ("charged_creeper/piglin", &CHARGED_CREEPER_PIGLIN),
     ("charged_creeper/root", &CHARGED_CREEPER_ROOT),
@@ -64423,7 +64423,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ),
     (
         "minecraft:blocks/attached_pumpkin_stem",
-        &BLOCKS_ATTACHED_LITHUMMC_STEM,
+        &BLOCKS_ATTACHED_PUMPKIN_STEM,
     ),
     ("minecraft:blocks/azalea", &BLOCKS_AZALEA),
     ("minecraft:blocks/azalea_leaves", &BLOCKS_AZALEA_LEAVES),
@@ -64694,7 +64694,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
         "minecraft:blocks/cartography_table",
         &BLOCKS_CARTOGRAPHY_TABLE,
     ),
-    ("minecraft:blocks/carved_pumpkin", &BLOCKS_CARVED_LITHUMMC),
+    ("minecraft:blocks/carved_pumpkin", &BLOCKS_CARVED_PUMPKIN),
     ("minecraft:blocks/cauldron", &BLOCKS_CAULDRON),
     ("minecraft:blocks/cave_vines", &BLOCKS_CAVE_VINES),
     (
@@ -66383,8 +66383,8 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
         &BLOCKS_PRISMARINE_STAIRS,
     ),
     ("minecraft:blocks/prismarine_wall", &BLOCKS_PRISMARINE_WALL),
-    ("minecraft:blocks/lithummc", &BLOCKS_LITHUMMC),
-    ("minecraft:blocks/lithummc_stem", &BLOCKS_LITHUMMC_STEM),
+    ("minecraft:blocks/pumpkin", &BLOCKS_PUMPKIN),
+    ("minecraft:blocks/pumpkin_stem", &BLOCKS_PUMPKIN_STEM),
     ("minecraft:blocks/purple_banner", &BLOCKS_PURPLE_BANNER),
     ("minecraft:blocks/purple_bed", &BLOCKS_PURPLE_BED),
     ("minecraft:blocks/purple_candle", &BLOCKS_PURPLE_CANDLE),
@@ -67309,7 +67309,7 @@ static LOOT_TABLES_BY_KEY: [(&str, &LootTable); 2894usize] = [
     ),
     ("minecraft:blocks/zombie_head", &BLOCKS_ZOMBIE_HEAD),
     ("minecraft:brush/armadillo", &BRUSH_ARMADILLO),
-    ("minecraft:carve/lithummc", &CARVE_LITHUMMC),
+    ("minecraft:carve/pumpkin", &CARVE_PUMPKIN),
     (
         "minecraft:charged_creeper/creeper",
         &CHARGED_CREEPER_CREEPER,

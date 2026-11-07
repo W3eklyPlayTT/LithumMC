@@ -589,7 +589,7 @@ impl StaticProcessorList {
             },
             location_predicate: StaticRuleTest::AlwaysTrue,
             output_state: StaticOutputState {
-                default_state: crate::Block::LITHUMMC_STEM.default_state,
+                default_state: crate::Block::PUMPKIN_STEM.default_state,
                 properties: &[],
             },
             block_entity_modifier: None,
@@ -2387,7 +2387,7 @@ impl StaticProcessorList {
             },
             location_predicate: StaticRuleTest::AlwaysTrue,
             output_state: StaticOutputState {
-                default_state: crate::Block::LITHUMMC_STEM.default_state,
+                default_state: crate::Block::PUMPKIN_STEM.default_state,
                 properties: &[],
             },
             block_entity_modifier: None,

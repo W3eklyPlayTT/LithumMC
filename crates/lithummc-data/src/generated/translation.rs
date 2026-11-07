@@ -1489,8 +1489,8 @@ pub mod java {
     pub const BLOCK_MINECRAFT_ANVIL: &str = "block.minecraft.anvil";
     #[doc = "Attached Melon Stem"]
     pub const BLOCK_MINECRAFT_ATTACHED_MELON_STEM: &str = "block.minecraft.attached_melon_stem";
-    #[doc = "Attached LithumMC Stem"]
-    pub const BLOCK_MINECRAFT_ATTACHED_LITHUMMC_STEM: &str = "block.minecraft.attached_pumpkin_stem";
+    #[doc = "Attached Pumpkin Stem"]
+    pub const BLOCK_MINECRAFT_ATTACHED_PUMPKIN_STEM: &str = "block.minecraft.attached_pumpkin_stem";
     #[doc = "Azalea"]
     pub const BLOCK_MINECRAFT_AZALEA: &str = "block.minecraft.azalea";
     #[doc = "Azalea Leaves"]
@@ -3653,8 +3653,8 @@ pub mod java {
     pub const BLOCK_MINECRAFT_CARROTS: &str = "block.minecraft.carrots";
     #[doc = "Cartography Table"]
     pub const BLOCK_MINECRAFT_CARTOGRAPHY_TABLE: &str = "block.minecraft.cartography_table";
-    #[doc = "Carved LithumMC"]
-    pub const BLOCK_MINECRAFT_CARVED_LITHUMMC: &str = "block.minecraft.carved_pumpkin";
+    #[doc = "Carved Pumpkin"]
+    pub const BLOCK_MINECRAFT_CARVED_PUMPKIN: &str = "block.minecraft.carved_pumpkin";
     #[doc = "Cauldron"]
     pub const BLOCK_MINECRAFT_CAULDRON: &str = "block.minecraft.cauldron";
     #[doc = "Cave Air"]
@@ -5219,10 +5219,10 @@ pub mod java {
     pub const BLOCK_MINECRAFT_PRISMARINE_STAIRS: &str = "block.minecraft.prismarine_stairs";
     #[doc = "Prismarine Wall"]
     pub const BLOCK_MINECRAFT_PRISMARINE_WALL: &str = "block.minecraft.prismarine_wall";
-    #[doc = "LithumMC"]
-    pub const BLOCK_MINECRAFT_LITHUMMC: &str = "block.minecraft.lithummc";
-    #[doc = "LithumMC Stem"]
-    pub const BLOCK_MINECRAFT_LITHUMMC_STEM: &str = "block.minecraft.pumpkin_stem";
+    #[doc = "Pumpkin"]
+    pub const BLOCK_MINECRAFT_PUMPKIN: &str = "block.minecraft.pumpkin";
+    #[doc = "Pumpkin Stem"]
+    pub const BLOCK_MINECRAFT_PUMPKIN_STEM: &str = "block.minecraft.pumpkin_stem";
     #[doc = "Purple Banner"]
     pub const BLOCK_MINECRAFT_PURPLE_BANNER: &str = "block.minecraft.purple_banner";
     #[doc = "Purple Bed"]
@@ -11452,10 +11452,10 @@ pub mod java {
     pub const ITEM_MINECRAFT_PUFFERFISH_BUCKET: &str = "item.minecraft.pufferfish_bucket";
     #[doc = "Pufferfish Spawn Egg"]
     pub const ITEM_MINECRAFT_PUFFERFISH_SPAWN_EGG: &str = "item.minecraft.pufferfish_spawn_egg";
-    #[doc = "LithumMC Pie"]
-    pub const ITEM_MINECRAFT_LITHUMMC_PIE: &str = "item.minecraft.pumpkin_pie";
-    #[doc = "LithumMC Seeds"]
-    pub const ITEM_MINECRAFT_LITHUMMC_SEEDS: &str = "item.minecraft.pumpkin_seeds";
+    #[doc = "Pumpkin Pie"]
+    pub const ITEM_MINECRAFT_PUMPKIN_PIE: &str = "item.minecraft.pumpkin_pie";
+    #[doc = "Pumpkin Seeds"]
+    pub const ITEM_MINECRAFT_PUMPKIN_SEEDS: &str = "item.minecraft.pumpkin_seeds";
     #[doc = "Purple Bundle"]
     pub const ITEM_MINECRAFT_PURPLE_BUNDLE: &str = "item.minecraft.purple_bundle";
     #[doc = "Purple Cushion"]
@@ -16622,7 +16622,7 @@ pub mod java {
     #[doc = "Pressure Plate clicks"]
     pub const SUBTITLES_BLOCK_PRESSURE_PLATE_CLICK: &str = "subtitles.block.pressure_plate.click";
     #[doc = "Shears carve"]
-    pub const SUBTITLES_BLOCK_LITHUMMC_CARVE: &str = "subtitles.block.lithummc.carve";
+    pub const SUBTITLES_BLOCK_PUMPKIN_CARVE: &str = "subtitles.block.pumpkin.carve";
     #[doc = "Torch fizzes"]
     pub const SUBTITLES_BLOCK_REDSTONE_TORCH_BURNOUT: &str =
         "subtitles.block.redstone_torch.burnout";
@@ -27492,7 +27492,7 @@ pub mod bedrock {
     pub const HOWTOPLAY_ARMOR_TEXT_6: &str = "howtoplay.armor.text.6";
     #[doc = "Disguise"]
     pub const HOWTOPLAY_ARMOR_HEADER_3: &str = "howtoplay.armor.header.3";
-    #[doc = "You can also wear a Carved LithumMC on your head. This won't give you any :armor: but will make it so Endermen won't get mad when you look at them."]
+    #[doc = "You can also wear a Carved Pumpkin on your head. This won't give you any :armor: but will make it so Endermen won't get mad when you look at them."]
     pub const HOWTOPLAY_ARMOR_TEXT_7: &str = "howtoplay.armor.text.7";
     #[doc = "Armor Stand"]
     pub const HOWTOPLAY_ARMORSTAND: &str = "howtoplay.armorStand";
@@ -31409,8 +31409,8 @@ pub mod bedrock {
     pub const ITEM_PRISMARINE_CRYSTALS_NAME: &str = "item.prismarine_crystals.name";
     #[doc = "Prismarine Shard"]
     pub const ITEM_PRISMARINE_SHARD_NAME: &str = "item.prismarine_shard.name";
-    #[doc = "LithumMC Pie"]
-    pub const ITEM_LITHUMMC_PIE_NAME: &str = "item.pumpkin_pie.name";
+    #[doc = "Pumpkin Pie"]
+    pub const ITEM_PUMPKIN_PIE_NAME: &str = "item.pumpkin_pie.name";
     #[doc = "Cooked Rabbit"]
     pub const ITEM_COOKED_RABBIT_NAME: &str = "item.cooked_rabbit.name";
     #[doc = "Rabbit's Foot"]
@@ -31485,8 +31485,8 @@ pub mod bedrock {
     pub const ITEM_BEETROOT_SEEDS_NAME: &str = "item.beetroot_seeds.name";
     #[doc = "Melon Seeds"]
     pub const ITEM_MELON_SEEDS_NAME: &str = "item.melon_seeds.name";
-    #[doc = "LithumMC Seeds"]
-    pub const ITEM_LITHUMMC_SEEDS_NAME: &str = "item.pumpkin_seeds.name";
+    #[doc = "Pumpkin Seeds"]
+    pub const ITEM_PUMPKIN_SEEDS_NAME: &str = "item.pumpkin_seeds.name";
     #[doc = "Shears"]
     pub const ITEM_SHEARS_NAME: &str = "item.shears.name";
     #[doc = "Diamond Shovel"]
@@ -40431,8 +40431,8 @@ pub mod bedrock {
     pub const TILE_DRIED_KELP_BLOCK_NAME: &str = "tile.dried_kelp_block.name";
     #[doc = "Carrots"]
     pub const TILE_CARROTS_NAME: &str = "tile.carrots.name";
-    #[doc = "Carved LithumMC"]
-    pub const TILE_CARVED_LITHUMMC_NAME: &str = "tile.carved_pumpkin.name";
+    #[doc = "Carved Pumpkin"]
+    pub const TILE_CARVED_PUMPKIN_NAME: &str = "tile.carved_pumpkin.name";
     #[doc = "Cauldron"]
     pub const TILE_CAULDRON_NAME: &str = "tile.cauldron.name";
     #[doc = "Chalkboard"]
@@ -41060,7 +41060,7 @@ pub mod bedrock {
     pub const TILE_WAXED_OXIDIZED_LIGHTNING_ROD_NAME: &str =
         "tile.waxed_oxidized_lightning_rod.name";
     #[doc = "Jack o'Lantern"]
-    pub const TILE_LIT_LITHUMMC_NAME: &str = "tile.lit_pumpkin.name";
+    pub const TILE_LIT_PUMPKIN_NAME: &str = "tile.lit_pumpkin.name";
     #[doc = "Locked chest"]
     pub const TILE_LOCKEDCHEST_NAME: &str = "tile.lockedchest.name";
     #[doc = "Acacia Log"]
@@ -41203,10 +41203,10 @@ pub mod bedrock {
     pub const TILE_PRISMARINE_DARK_NAME: &str = "tile.prismarine.dark.name";
     #[doc = "Prismarine"]
     pub const TILE_PRISMARINE_ROUGH_NAME: &str = "tile.prismarine.rough.name";
-    #[doc = "LithumMC"]
-    pub const TILE_LITHUMMC_NAME: &str = "tile.lithummc.name";
-    #[doc = "LithumMC Stem"]
-    pub const TILE_LITHUMMC_STEM_NAME: &str = "tile.pumpkin_stem.name";
+    #[doc = "Pumpkin"]
+    pub const TILE_PUMPKIN_NAME: &str = "tile.pumpkin.name";
+    #[doc = "Pumpkin Stem"]
+    pub const TILE_PUMPKIN_STEM_NAME: &str = "tile.pumpkin_stem.name";
     #[doc = "Chiseled Quartz Block"]
     pub const TILE_QUARTZ_BLOCK_CHISELED_NAME: &str = "tile.quartz_block.chiseled.name";
     #[doc = "Block of Quartz"]
@@ -43666,7 +43666,7 @@ pub mod bedrock {
     pub const MIDGAMETIPS_1: &str = "midgameTips.1";
     #[doc = "Feed a bone to a wolf to tame it. You can then make it sit or follow you."]
     pub const MIDGAMETIPS_2: &str = "midgameTips.2";
-    #[doc = "Wearing a Carved LithumMC on your head will keep Endermen from attacking you."]
+    #[doc = "Wearing a Carved Pumpkin on your head will keep Endermen from attacking you."]
     pub const MIDGAMETIPS_3: &str = "midgameTips.3";
     #[doc = "Harvest leather from cows, and use it to make armor and books."]
     pub const MIDGAMETIPS_4: &str = "midgameTips.4";
@@ -43724,7 +43724,7 @@ pub mod bedrock {
     pub const MIDGAMETIPS_30: &str = "midgameTips.30";
     #[doc = "Dolphins can lead you to shipwrecks and underwater ruins, feed them cod and follow their trail!"]
     pub const MIDGAMETIPS_31: &str = "midgameTips.31";
-    #[doc = "Use shears to carve a lithummc."]
+    #[doc = "Use shears to carve a pumpkin."]
     pub const MIDGAMETIPS_32: &str = "midgameTips.32";
     #[doc = "There are 3587 types of tropical fish!"]
     pub const MIDGAMETIPS_33: &str = "midgameTips.33";
@@ -45736,7 +45736,7 @@ pub mod bedrock {
     #[doc = "Pressure Plate clicks"]
     pub const SUBTITLES_BLOCK_PRESSURE_PLATE_CLICK: &str = "subtitles.block.pressure_plate.click";
     #[doc = "Shears carve"]
-    pub const SUBTITLES_BLOCK_LITHUMMC_CARVE: &str = "subtitles.block.lithummc.carve";
+    pub const SUBTITLES_BLOCK_PUMPKIN_CARVE: &str = "subtitles.block.pumpkin.carve";
     #[doc = "Torch fizzes"]
     pub const SUBTITLES_BLOCK_REDSTONE_TORCH_BURNOUT: &str =
         "subtitles.block.redstone_torch.burnout";
