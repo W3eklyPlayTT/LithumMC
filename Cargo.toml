@@ -1,0 +1,23 @@
+[package]
+name = "lithum-server"
+version = "0.1.0"
+edition = "2024"
+description = "Lithum: an experimental Rust Minecraft server foundation"
+license = "MIT"
+
+[[bin]]
+name = "lithum-server"
+path = "src/main.rs"
+
+[dependencies]
+rhai = { version = "1", features = ["sync"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sysinfo = "0.37"
+tokio = { version = "1", features = ["macros", "net", "io-util", "io-std", "rt-multi-thread", "sync", "time", "signal"] }
+toml = "0.9"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
