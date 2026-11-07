@@ -12,14 +12,14 @@ use lithummc_world::world::BlockFlags;
 use std::sync::Arc;
 
 #[lithummc_block("minecraft:pumpkin")]
-pub struct LithumMCBlock;
+pub struct PumpkinBlock;
 
-impl crate::block::BlockBehaviour for LithumMCBlock {
+impl crate::block::BlockBehaviour for PumpkinBlock {
     fn use_with_item(&self, args: UseWithItemArgs<'_>) -> BlockActionResult {
         if args.item_stack.item != &Item::SHEARS {
             return BlockActionResult::PassToDefaultBlockAction;
         }
-        let mut props = WallTorchLikeProperties::default(&Block::CARVED_LITHUMMC);
+        let mut props = WallTorchLikeProperties::default(&Block::CARVED_PUMPKIN);
         props.facing = args.hit.face.to_horizontal_facing().unwrap_or_else(|| {
             args.player
                 .living_entity
@@ -28,13 +28,13 @@ impl crate::block::BlockBehaviour for LithumMCBlock {
                 .opposite()
         });
         args.world.play_sound(
-            lithummc_data::sound::Sound::BlockLithumMCCarve,
+            lithummc_data::sound::Sound::BlockPumpkinCarve,
             lithummc_data::sound::SoundCategory::Blocks,
             &args.position.to_f64(),
         );
         args.world.set_block_state(
             args.position,
-            props.to_state_id(&Block::CARVED_LITHUMMC),
+            props.to_state_id(&Block::CARVED_PUMPKIN),
             BlockFlags::NOTIFY_ALL,
         );
         let entity = Entity::new(
@@ -44,7 +44,7 @@ impl crate::block::BlockBehaviour for LithumMCBlock {
         );
         let item_entity = Arc::new(ItemEntity::new(
             entity,
-            ItemStack::new(4, &Item::LITHUMMC_SEEDS),
+            ItemStack::new(4, &Item::PUMPKIN_SEEDS),
         ));
         args.world.spawn_entity(item_entity);
         args.player.damage_item_in_slot(args.equipment_slot, 1);

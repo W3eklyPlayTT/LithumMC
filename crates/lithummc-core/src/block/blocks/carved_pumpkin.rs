@@ -97,15 +97,15 @@ fn spawn_golem(world: &Arc<World>, pattern: &GolemPattern) {
     }
 }
 
-pub struct CarvedLithumMCBlock;
+pub struct CarvedPumpkinBlock;
 
-impl BlockMetadata for CarvedLithumMCBlock {
+impl BlockMetadata for CarvedPumpkinBlock {
     fn ids() -> Box<[BlockId]> {
         [BlockId::JACK_O_LANTERN, BlockId::CARVED_PUMPKIN].into()
     }
 }
 
-impl BlockBehaviour for CarvedLithumMCBlock {
+impl BlockBehaviour for CarvedPumpkinBlock {
     fn on_place(&self, args: OnPlaceArgs<'_>) -> BlockStateId {
         let mut props = WallTorchLikeProperties::default(args.block);
         props.facing = args

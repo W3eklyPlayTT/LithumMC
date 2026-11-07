@@ -87,7 +87,7 @@ pub mod leaves;
 pub mod logs;
 pub mod mangrove_roots;
 pub mod plant;
-pub mod lithummc;
+pub mod pumpkin;
 pub mod sculk;
 pub mod vine;
 

@@ -33,6 +33,9 @@ jobs:
         with:
           shared-key: lithummc-linux-x86_64
 
+      - name: Regenerate vanilla game data
+        run: cargo run --locked --package lithummc-codegen
+
       - name: Build optimized server
         run: cargo build --locked --release --package lithummc --bin lithummc-server
 
@@ -51,6 +54,11 @@ jobs:
           cp target/release/lithummc-server target/lithummc-jar-stage/native/lithummc-server-linux-x86_64
           jar --create --file dist/LithumMC.jar --manifest jar-launcher/MANIFEST.MF -C target/lithummc-jar-stage .
           sha256sum dist/LithumMC.jar > dist/LithumMC.jar.sha256
+          mkdir -p dist/generated
+          git diff --name-only -- crates/lithummc-data/src/generated | while IFS= read -r file; do
+            mkdir -p "dist/generated/$(dirname "$file")"
+            cp "$file" "dist/generated/$file"
+          done
 
       - uses: actions/upload-artifact@v7
         with:
@@ -60,4 +68,5 @@ jobs:
             dist/lithummc-server-linux-x86_64.sha256
             dist/LithumMC.jar
             dist/LithumMC.jar.sha256
+            dist/generated/**
           retention-days: 90

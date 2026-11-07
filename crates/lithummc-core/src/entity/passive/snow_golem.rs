@@ -76,7 +76,7 @@ impl SnowGolemEntity {
         let entity = self.get_entity();
         let flags = if has_pumpkin { 16u8 } else { 0u8 };
         entity.set_synced_data(
-            lithummc_data::tracked_data::snow_golem::DATA_LITHUMMC_ID,
+            lithummc_data::tracked_data::snow_golem::DATA_PUMPKIN_ID,
             flags as i8,
         );
     }
@@ -129,7 +129,7 @@ impl Mob for SnowGolemEntity {
         let entity = self.get_entity();
         let flags = if self.has_pumpkin() { 16u8 } else { 0u8 };
         entity.set_synced_data(
-            lithummc_data::tracked_data::snow_golem::DATA_LITHUMMC_ID,
+            lithummc_data::tracked_data::snow_golem::DATA_PUMPKIN_ID,
             flags as i8,
         );
     }
@@ -155,7 +155,7 @@ impl Mob for SnowGolemEntity {
             world.play_sound(Sound::EntitySnowGolemShear, SoundCategory::Players, &pos);
             let item_entity = Arc::new(ItemEntity::new(
                 Entity::new(world.clone(), pos, &EntityType::ITEM),
-                ItemStack::new(1, &Item::CARVED_LITHUMMC),
+                ItemStack::new(1, &Item::CARVED_PUMPKIN),
             ));
             world.spawn_entity(item_entity);
             if player.gamemode.load() != lithummc_util::GameMode::Creative {

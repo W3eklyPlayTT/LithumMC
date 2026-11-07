@@ -170,10 +170,10 @@ fn handle_pumpkin(
     face: BlockDirection,
     block: &Block,
 ) -> bool {
-    if block.id == BlockId::LITHUMMC {
+    if block.id == BlockId::PUMPKIN {
         let world = player.world();
         let mut props = lithummc_data::block_properties::WallTorchLikeProperties::default(
-            &Block::CARVED_LITHUMMC,
+            &Block::CARVED_PUMPKIN,
         );
         props.facing = face.to_horizontal_facing().unwrap_or_else(|| {
             player
@@ -184,11 +184,11 @@ fn handle_pumpkin(
         });
         world.set_block_state(
             location,
-            props.to_state_id(&Block::CARVED_LITHUMMC),
+            props.to_state_id(&Block::CARVED_PUMPKIN),
             BlockFlags::NOTIFY_ALL,
         );
         world.play_sound(
-            Sound::BlockLithumMCCarve,
+            Sound::BlockPumpkinCarve,
             SoundCategory::Blocks,
             &location.to_f64(),
         );
@@ -196,7 +196,7 @@ fn handle_pumpkin(
         let drop_pos = location.to_centered_f64();
         let item_entity = Arc::new(ItemEntity::new(
             Entity::new(world.clone(), drop_pos, &EntityType::ITEM),
-            ItemStack::new(4, &Item::LITHUMMC_SEEDS),
+            ItemStack::new(4, &Item::PUMPKIN_SEEDS),
         ));
         world.spawn_entity(item_entity);
         if player.gamemode.load() != lithummc_util::GameMode::Creative {

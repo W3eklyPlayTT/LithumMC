@@ -225,7 +225,7 @@ pub(super) fn is_crop_block(block: &Block) -> bool {
     block.has_tag(&tag::Block::MINECRAFT_CROPS)
         && block != &Block::PITCHER_CROP
         && block != &Block::MELON_STEM
-        && block != &Block::LITHUMMC_STEM
+        && block != &Block::PUMPKIN_STEM
 }
 
 pub(super) fn is_max_age(block: &Block, state_id: BlockStateId) -> bool {

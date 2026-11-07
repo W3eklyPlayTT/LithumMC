@@ -18,14 +18,14 @@ pub struct AttachedStemBlock;
 
 impl BlockMetadata for AttachedStemBlock {
     fn ids() -> Box<[BlockId]> {
-        [BlockId::ATTACHED_LITHUMMC_STEM, BlockId::ATTACHED_MELON_STEM].into()
+        [BlockId::ATTACHED_PUMPKIN_STEM, BlockId::ATTACHED_MELON_STEM].into()
     }
 }
 
 impl AttachedStemBlock {
     fn get_stem(block: &Block) -> &Block {
         match block.id {
-            id if id == Block::ATTACHED_LITHUMMC_STEM.id => &Block::LITHUMMC_STEM,
+            id if id == Block::ATTACHED_PUMPKIN_STEM.id => &Block::PUMPKIN_STEM,
             id if id == Block::ATTACHED_MELON_STEM.id => &Block::MELON_STEM,
             _ => &Block::MELON_STEM, // Should never happen
         }
@@ -33,7 +33,7 @@ impl AttachedStemBlock {
 
     fn get_gourd(block: &Block) -> &Block {
         match block.id {
-            id if id == Block::ATTACHED_LITHUMMC_STEM.id => &Block::LITHUMMC,
+            id if id == Block::ATTACHED_PUMPKIN_STEM.id => &Block::PUMPKIN,
             id if id == Block::ATTACHED_MELON_STEM.id => &Block::MELON,
             _ => &Block::MELON, // Should never happen
         }
@@ -41,8 +41,8 @@ impl AttachedStemBlock {
 
     fn can_survive(stem_block: &Block, block_accessor: &dyn BlockAccessor, pos: &BlockPos) -> bool {
         let below = block_accessor.get_block(&pos.down());
-        if stem_block == &Block::ATTACHED_LITHUMMC_STEM {
-            below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_LITHUMMC_STEM)
+        if stem_block == &Block::ATTACHED_PUMPKIN_STEM {
+            below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_PUMPKIN_STEM)
         } else {
             below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_MELON_STEM)
         }

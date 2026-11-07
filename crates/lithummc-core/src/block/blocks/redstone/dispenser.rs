@@ -5,7 +5,7 @@ use std::sync::Mutex;
 use std::sync::atomic::AtomicBool;
 use uuid::Uuid;
 
-use crate::block::blocks::carved_lithummc::find_golem_pattern;
+use crate::block::blocks::carved_pumpkin::find_golem_pattern;
 use crate::block::blocks::redstone::block_receives_redstone_power;
 use crate::block::blocks::tnt::TNTBlock;
 use crate::block::blocks::wither_skull::find_wither_pattern;
@@ -391,9 +391,9 @@ impl DispenserBlock {
         } else if item.item.id == Item::WITHER_SKELETON_SKULL.id {
             // Placed only when it completes a wither, otherwise worn as a helmet
             Self::dispense_mob_head(ctx, item, &Block::WITHER_SKELETON_SKULL);
-        } else if item.item.id == Item::CARVED_LITHUMMC.id {
+        } else if item.item.id == Item::CARVED_PUMPKIN.id {
             // Placed only when it completes a golem, otherwise worn as a helmet
-            Self::dispense_mob_head(ctx, item, &Block::CARVED_LITHUMMC);
+            Self::dispense_mob_head(ctx, item, &Block::CARVED_PUMPKIN);
         } else if Block::from_item_id(item.item.id)
             .is_some_and(|block| block.has_tag(&tag::Block::MINECRAFT_SHULKER_BOXES))
         {

@@ -18,7 +18,7 @@ pub(super) async fn test_snow_golem_pattern_spawns(helper: GameTestHelper) -> Ga
         .set_block_default(&mid_pos, &Block::SNOW_BLOCK)
         .await?;
     helper
-        .set_block_default(&head_pos, &Block::CARVED_LITHUMMC)
+        .set_block_default(&head_pos, &Block::CARVED_PUMPKIN)
         .await?;
 
     helper.assert_block_present(&base_pos, &Block::AIR).await?;
@@ -52,7 +52,7 @@ pub(super) async fn test_iron_golem_pattern_spawns(helper: GameTestHelper) -> Ga
         .set_block_default(&right_arm, &Block::IRON_BLOCK)
         .await?;
     helper
-        .set_block_default(&head_pos, &Block::CARVED_LITHUMMC)
+        .set_block_default(&head_pos, &Block::CARVED_PUMPKIN)
         .await?;
 
     for pos in [base_pos, mid_pos, left_arm, right_arm, head_pos] {

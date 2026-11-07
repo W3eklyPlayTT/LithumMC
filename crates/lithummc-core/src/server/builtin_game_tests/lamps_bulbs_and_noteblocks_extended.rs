@@ -160,7 +160,7 @@ pub(super) async fn test_note_block_instruments_xylophone_iron_cowbell_didgerido
             (1, &Block::BONE_BLOCK, NoteblockInstrument::Xylophone),
             (3, &Block::IRON_BLOCK, NoteblockInstrument::IronXylophone),
             (5, &Block::SOUL_SAND, NoteblockInstrument::CowBell),
-            (7, &Block::LITHUMMC, NoteblockInstrument::Didgeridoo),
+            (7, &Block::PUMPKIN, NoteblockInstrument::Didgeridoo),
         ],
     )
     .await?;

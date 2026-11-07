@@ -573,10 +573,10 @@ impl BlockIsReplacing {
 pub fn is_exception_for_connection(block: &Block) -> bool {
     block.has_tag(&tag::Block::MINECRAFT_LEAVES)
         || block == &Block::BARRIER
-        || block == &Block::CARVED_LITHUMMC
+        || block == &Block::CARVED_PUMPKIN
         || block == &Block::JACK_O_LANTERN
         || block == &Block::MELON
-        || block == &Block::LITHUMMC
+        || block == &Block::PUMPKIN
         || block.has_tag(&tag::Block::MINECRAFT_SHULKER_BOXES)
 }
 

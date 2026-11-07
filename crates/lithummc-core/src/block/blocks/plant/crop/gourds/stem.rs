@@ -24,7 +24,7 @@ pub struct StemBlock;
 
 impl BlockMetadata for StemBlock {
     fn ids() -> Box<[BlockId]> {
-        [BlockId::LITHUMMC_STEM, BlockId::MELON_STEM].into()
+        [BlockId::PUMPKIN_STEM, BlockId::MELON_STEM].into()
     }
 }
 
@@ -37,7 +37,7 @@ impl StemBlock {
 
     fn get_attached_stem(dir: HorizontalFacing, block: &Block) -> BlockStateId {
         let attached_block = match block.id {
-            id if id == Block::LITHUMMC_STEM.id => &Block::ATTACHED_LITHUMMC_STEM,
+            id if id == Block::PUMPKIN_STEM.id => &Block::ATTACHED_PUMPKIN_STEM,
             id if id == Block::MELON_STEM.id => &Block::ATTACHED_MELON_STEM,
             _ => &Block::ATTACHED_MELON_STEM, // Should never happen
         };
@@ -48,7 +48,7 @@ impl StemBlock {
 
     fn get_gourd(block: &Block) -> &Block {
         match block.id {
-            id if id == Block::LITHUMMC_STEM.id => &Block::LITHUMMC,
+            id if id == Block::PUMPKIN_STEM.id => &Block::PUMPKIN,
             id if id == Block::MELON_STEM.id => &Block::MELON,
             _ => &Block::MELON, // Should never happen
         }
@@ -56,16 +56,16 @@ impl StemBlock {
 
     fn can_survive(stem_block: &Block, block_accessor: &dyn BlockAccessor, pos: &BlockPos) -> bool {
         let below = block_accessor.get_block(&pos.down());
-        if stem_block == &Block::LITHUMMC_STEM {
-            below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_LITHUMMC_STEM)
+        if stem_block == &Block::PUMPKIN_STEM {
+            below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_PUMPKIN_STEM)
         } else {
             below.has_tag(&tag::Block::MINECRAFT_SUPPORTS_MELON_STEM)
         }
     }
 
     fn supports_fruit(stem_block: &Block, under_block: &Block) -> bool {
-        if stem_block == &Block::LITHUMMC_STEM {
-            under_block.has_tag(&tag::Block::MINECRAFT_SUPPORTS_LITHUMMC_STEM_FRUIT)
+        if stem_block == &Block::PUMPKIN_STEM {
+            under_block.has_tag(&tag::Block::MINECRAFT_SUPPORTS_PUMPKIN_STEM_FRUIT)
         } else {
             under_block.has_tag(&tag::Block::MINECRAFT_SUPPORTS_MELON_STEM_FRUIT)
         }

@@ -16,7 +16,7 @@ use crate::block::blocks::candle_cakes::CandleCakeBlock;
 use crate::block::blocks::candles::CandleBlock;
 use crate::block::blocks::carpet::{CarpetBlock, MossCarpetBlock, PaleMossCarpetBlock};
 use crate::block::blocks::cartography_table::CartographyTableBlock;
-use crate::block::blocks::carved_lithummc::CarvedLithumMCBlock;
+use crate::block::blocks::carved_pumpkin::CarvedPumpkinBlock;
 use crate::block::blocks::cauldron::CauldronBlock;
 use crate::block::blocks::chests::{ChestBlock, CopperChestBlock, TrappedChestBlock};
 use crate::block::blocks::chiseled_bookshelf::ChiseledBookshelfBlock;
@@ -113,7 +113,7 @@ use crate::block::blocks::plant::twisting_vines::TwistingVinesBlock;
 use crate::block::blocks::plant::weeping_vines::WeepingVinesBlock;
 use crate::block::blocks::plant::wither_rose::WitherRoseBlock;
 use crate::block::blocks::powder_snow::PowderSnowBlock;
-use crate::block::blocks::lithummc::LithumMCBlock;
+use crate::block::blocks::pumpkin::PumpkinBlock;
 use crate::block::blocks::redstone::bell::BellBlock;
 use crate::block::blocks::redstone::buttons::ButtonBlock;
 use crate::block::blocks::redstone::comparator::ComparatorBlock;
@@ -259,7 +259,7 @@ pub fn default_registry() -> Arc<BlockRegistry> {
     manager.register(ChorusPlantBlock);
     manager.register(CocoaBlock);
     manager.register(CarpetBlock);
-    manager.register(CarvedLithumMCBlock);
+    manager.register(CarvedPumpkinBlock);
     manager.register(WitherSkeletonSkullBlock);
     manager.register(CampfireBlock);
     manager.register(MossCarpetBlock);
@@ -361,7 +361,7 @@ pub fn default_registry() -> Arc<BlockRegistry> {
     manager.register(PotentSulfurBlock);
     manager.register(PowderSnowBlock);
     manager.register(SpongeBlock);
-    manager.register(LithumMCBlock);
+    manager.register(PumpkinBlock);
     manager.register(WetSpongeBlock);
 
     // Weathering copper blocks
