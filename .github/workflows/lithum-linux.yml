@@ -1,0 +1,49 @@
+name: Build Lithum Linux server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - Cargo.toml
+      - Cargo.lock
+      - crates/**
+      - .github/workflows/lithum-linux.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-linux-x86_64:
+    name: Linux x86_64 server
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Select stable Rust
+        run: rustup update stable && rustup default stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: lithum-linux-x86_64
+
+      - name: Build optimized server
+        run: cargo build --locked --release --package pumpkin --bin lithum-server
+
+      - name: Package Linux executable
+        run: |
+          mkdir -p dist
+          install -m 755 target/release/lithum-server dist/lithum-server-linux-x86_64
+          sha256sum dist/lithum-server-linux-x86_64 > dist/lithum-server-linux-x86_64.sha256
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: LithumServer-linux-x86_64
+          path: |
+            dist/lithum-server-linux-x86_64
+            dist/lithum-server-linux-x86_64.sha256
+          retention-days: 90

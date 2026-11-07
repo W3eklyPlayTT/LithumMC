@@ -1,0 +1,32 @@
+{
+  "_comment": "Custom Lithum egg for Pelican and Pterodactyl panels. Import through the panel administrator, then upload the Linux x86_64 executable to the server root.",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-11-07T00:00:00+00:00",
+  "name": "Lithum",
+  "author": "Lithum contributors",
+  "description": "Lithum Rust Minecraft server for Linux x86_64. Upload lithum-server-linux-x86_64 to the server root after installation.",
+  "features": null,
+  "docker_images": {
+    "Pelican Debian": "ghcr.io/pelican-eggs/yolks:debian",
+    "Pterodactyl Debian": "ghcr.io/pterodactyl/yolks:debian"
+  },
+  "file_denylist": [],
+  "startup": "chmod +x ./lithum-server-linux-x86_64 && exec ./lithum-server-linux-x86_64",
+  "config": {
+    "files": "{\n  \"lithum.toml\": {\n    \"parser\": \"file\",\n    \"find\": {\n      \"address = \\\"0.0.0.0:25565\\\"\": \"address = \\\"0.0.0.0:{{server.build.default.port}}\\\"\"\n    }\n  }\n}",
+    "startup": "{\n  \"done\": \"Server is now running.\"\n}",
+    "logs": "{}",
+    "stop": "stop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -e\nmkdir -p /mnt/server\necho 'Lithum egg installed. Upload lithum-server-linux-x86_64 to the server root before starting.'\n",
+      "container": "ghcr.io/pterodactyl/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": []
+}

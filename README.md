@@ -12,6 +12,17 @@ Lithum is a Minecraft Java server built in Rust. This first playable build packa
 
 The JAR is a Java launcher that extracts and starts the bundled Windows x64 Rust server. It is not a Java reimplementation and this first JAR does not run on Linux or macOS. The source can also be built as a native server executable.
 
+## Pelican and Pterodactyl hosting
+
+Pelican and Pterodactyl run game servers in Linux Docker containers, so use the Linux executable rather than the Windows JAR. The `Build Lithum Linux server` workflow creates a Linux x86_64 executable artifact after changes are pushed to `main` (or when started manually from GitHub Actions).
+
+1. Download the `LithumServer-linux-x86_64` artifact from a successful workflow run and extract it.
+2. Import [`deploy/egg-lithum.json`](deploy/egg-lithum.json) through the panel administrator's custom Eggs page. Choose the Debian Docker image for that panel.
+3. Create a Lithum server with a Java Edition allocation, then upload `lithum-server-linux-x86_64` into the server's root folder.
+4. Start the server. The Egg makes the executable runnable, and the first launch creates `lithum.toml` and the world files. The Egg updates the Java bind port to the allocation chosen in the panel.
+
+Importing an Egg requires panel administrator access. If the host does not allow custom Eggs, ask its administrator to add this Egg or use a host that allows a custom Linux executable.
+
 ## Plugins
 
 Lithum plugins are sandboxed WebAssembly components. Paper, Bukkit, Spigot, and Fabric plugin JARs are not compatible. The `lithum-plugin-api` Rust crate is a Lithum-named compatibility re-export of Pumpkin's permissively licensed plugin API. The initial API/runtime is early and may change.
