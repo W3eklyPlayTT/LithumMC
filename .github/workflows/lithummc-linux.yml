@@ -8,6 +8,7 @@ on:
       - Cargo.toml
       - Cargo.lock
       - crates/**
+      - assets/**
       - .github/workflows/lithummc-linux.yml
       - jar-launcher/**
   workflow_dispatch:
