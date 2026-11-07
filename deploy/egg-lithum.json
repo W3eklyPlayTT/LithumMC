@@ -14,7 +14,7 @@
     "Pterodactyl Debian": "ghcr.io/pterodactyl/yolks:debian"
   },
   "file_denylist": [],
-  "startup": "chmod +x ./lithum-server-linux-x86_64 && exec ./lithum-server-linux-x86_64",
+  "startup": "if [ ! -f ./lithum.toml ]; then printf '[networking.java]\\naddress = \"0.0.0.0:%s\"\\n' \"$SERVER_PORT\" > ./lithum.toml; fi; chmod +x ./lithum-server-linux-x86_64; exec ./lithum-server-linux-x86_64",
   "config": {
     "files": "{\n  \"lithum.toml\": {\n    \"parser\": \"file\",\n    \"find\": {\n      \"address = \\\"0.0.0.0:25565\\\"\": \"address = \\\"0.0.0.0:{{server.build.default.port}}\\\"\"\n    }\n  }\n}",
     "startup": "{\n  \"done\": \"Server is now running.\"\n}",

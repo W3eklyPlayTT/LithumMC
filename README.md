@@ -19,7 +19,7 @@ Pelican and Pterodactyl run game servers in Linux Docker containers, so use the 
 1. Download the `LithumServer-linux-x86_64` artifact from a successful workflow run and extract it.
 2. Import [`deploy/egg-lithum.json`](deploy/egg-lithum.json) through the panel administrator's custom Eggs page. Choose the Debian Docker image for that panel.
 3. Create a Lithum server with a Java Edition allocation, then upload `lithum-server-linux-x86_64` into the server's root folder.
-4. Start the server. The Egg makes the executable runnable, and the first launch creates `lithum.toml` and the world files. The Egg updates the Java bind port to the allocation chosen in the panel.
+4. Start the server. The Egg creates `lithum.toml` with the panel's allocated port before first launch; Lithum fills in the remaining defaults and creates the world files.
 
 Importing an Egg requires panel administrator access. If the host does not allow custom Eggs, ask its administrator to add this Egg or use a host that allows a custom Linux executable.
 
