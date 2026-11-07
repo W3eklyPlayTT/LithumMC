@@ -1,51 +1,61 @@
 # Lithum Server
 
-Lithum is an experimental Minecraft server foundation written in Rust. It is not a Paper replacement yet. The current build implements the Minecraft Java server-list handshake, status response and ping/pong, plus a Rust-hosted Rhai script API for server lifecycle, one-second tick and console-command callbacks.
+Lithum is a Minecraft Java server built in Rust. This first playable build packages the real game server, world handling, chunk loading, and a sandboxed WebAssembly plugin runtime. The server engine is based on [Pumpkin](https://github.com/Pumpkin-MC/Pumpkin); the Lithum name and package do not mean the engine was rewritten from scratch.
 
-## Current limits
+## Run the JAR on Windows
 
-This prototype does **not** implement player login, play packets, chunks, world generation, entities, persistence, or Paper/Bukkit plugin compatibility. A client can see the server in the multiplayer list, but joining is rejected with an explanatory message. The advertised protocol number is a placeholder, so server-list version compatibility may be shown as unknown. The project does not produce a `.jar`: a Rust server ships as a native executable (or a platform archive containing it).
+1. Install Java 21 or newer.
+2. Put `LithumServer.jar` in a new, empty server folder.
+3. Run `java -jar LithumServer.jar` from that folder.
+4. The first start creates `lithum.toml` and the world files. Review the configuration and restart the server.
+5. Connect with a Java Edition client for Minecraft 26.3 at `localhost:25565`.
 
-Horizon is a useful reference and already has a native `horizon-server`; Lithum is a separate project with a different plugin API goal. See [Horizon](https://github.com/horizon-rust/horizon).
+The JAR is a Java launcher that extracts and starts the bundled Windows x64 Rust server. It is not a Java reimplementation and this first JAR does not run on Linux or macOS. The source can also be built as a native server executable.
 
-## Build and run
+## Plugins
 
-Requires Rust stable and Cargo.
+Lithum plugins are sandboxed WebAssembly components. Paper, Bukkit, Spigot, and Fabric plugin JARs are not compatible. The `lithum-plugin-api` Rust crate is a Lithum-named compatibility re-export of Pumpkin's permissively licensed plugin API. The initial API/runtime is early and may change.
+
+The example plugin in `examples/hello-lithum-plugin` shows the lifecycle entry point. Build it with a Rust toolchain that has the `wasm32-wasip2` target installed, then put the generated `.wasm` component in the server's `plugins` directory.
+
+## Configuration and performance
+
+Lithum creates `lithum.toml` on first launch. It includes networking, world and chunk handling, lighting, plugin permissions, and other server settings. Chunk generation and lighting use worker threads; the engine also has chunk scheduling and entity-island options. Defaults aim to preserve vanilla behavior, so tune view distance and simulation distance for the host machine and player count.
+
+This build does not include a graphical admin panel or a live RAM/TPS dashboard. Server health and performance telemetry are a follow-up feature.
+
+## Build the Windows JAR
+
+Requirements: Rust 1.97 or newer, the MSVC C++ build tools, and a Java 21+ JDK.
 
 ```powershell
-cargo build --release
-Copy-Item lithum.example.toml lithum.toml
-.
-target\release\lithum-server.exe
+powershell -ExecutionPolicy Bypass -File .\scripts\build-windows-jar.ps1
 ```
 
-For Windows with Java 21+, the packaged launcher is `dist/LithumServer.jar`:
+The script writes `dist/LithumServer.jar` and `dist/lithum-server.exe`.
 
-```powershell
-java -jar .\dist\LithumServer.jar
-```
+## Source and license
 
-This JAR bundles the Windows Rust executable and starts it from the current folder, where Lithum reads or creates `lithum.toml`. The JAR is a Windows launcher package; the server itself remains a native Rust executable.
+Lithum includes code from [Pumpkin-MC/Pumpkin](https://github.com/Pumpkin-MC/Pumpkin), used under GPL-3.0. The upstream source commit is recorded in [NOTICE.md](NOTICE.md). The server and this derivative distribution are GPL-3.0; the upstream plugin API and Lithum API compatibility crate are MIT OR Apache-2.0. See the license files in `crates/pumpkin-plugin-api` for those plugin API terms.
 
-On first run, Lithum creates `lithum.toml` with defaults. Set `server.address`, `server.port`, `server.motd`, `server.max_players`, `server.max_connections`, `server.worker_threads`, and `metrics.refresh_interval_ms` there. `worker_threads = 0` uses the machine's available CPU count. The connection cap bounds concurrent TCP clients.
+## Contributions
 
-Console commands: `status`, `tps`, `help`, `stop`. The metrics display reports measured tick rate, process memory and current connections. The memory bar is scaled in 128 MiB increments; it is a visual guide, not a configured memory limit.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Lithum script plugins
+## Docs
 
-Drop `.rhai` files into `plugins/`. Functions are optional:
+Pumpkin's documentation can be found at <https://pumpkinmc.org/>
 
-```rhai
-fn on_enable() { print("plugin enabled"); }
-fn on_tick(tick) { }
-fn on_console_command(command) { }
-```
+## Communication
 
-`on_tick` fires once per second. Scripts run in Rhai's embedded engine, without filesystem or process APIs registered by this server. A plugin callback runs synchronously, so a slow or infinite script can delay the server loop; use trusted plugins only. This API is experimental and currently exposes lifecycle/console signals, not game entities or world access.
+Consider joining [our Discord server](https://discord.gg/wT8XjrjKkf) to stay up-to-date on events, updates, and connect with other members.
 
-## Roadmap
+## Funding
 
-1. Select and document a Minecraft protocol target; implement login/configuration/play state and online authentication.
-2. Add chunk storage, world persistence, chunk generation and scheduled world/entity ticking.
-3. Expand the plugin API with permissioned player, world, command and event interfaces, then stabilize its versioning.
-4. Profile under realistic player and chunk loads before making performance claims.
+If you want to fund me and help the project, check out the [Donation Page](https://pumpkinmc.org/donate/).
+
+## License & Attribution
+
+* **Pumpkin Server**: Licensed under the [GNU General Public License v3.0 (GPLv3)](LICENSE).
+* **Plugin API (`pumpkin-plugin-api` & `pumpkin-plugin-wit`)**: Dual-licensed under [MIT](crates/pumpkin-plugin-api/LICENSE-MIT) OR [Apache-2.0](crates/pumpkin-plugin-api/LICENSE-APACHE) for maximum flexibility when writing plugins.
+* **Third-Party Assets & Data**: Bedrock mappings, protocol conversion data, and Minecraft assets are subject to their respective licenses and attribution terms. See [assets/NOTICE.md](assets/NOTICE.md) for full details.
