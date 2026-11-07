@@ -751,7 +751,34 @@ impl JavaClient {
         server: &Arc<Server>,
         packet: &RawPacket,
     ) -> Result<(), Box<dyn LithumMCError>> {
-        // The multiversion plugin has converted older clients' packets to 26.3 by now.
+        // Protocol adapters see the client's original packet before the 26.3 play
+        // dispatcher parses it, just as they do for login/configuration packets.
+        // This is required because packet IDs and payload layouts are versioned.
+        let translated_packet;
+        let packet = if self.version.load() != CURRENT_MC_VERSION
+            && server
+                .plugin_manager
+                .has_handlers::<crate::plugin::server::packet::ConnectionPacketReceivedEvent>()
+        {
+            let mut event = crate::plugin::server::packet::ConnectionPacketReceivedEvent::new(
+                self.id,
+                self.version.load(),
+                ConnectionState::Play,
+                packet.id,
+                packet.payload.clone(),
+            );
+            server.plugin_manager.fire_blocking(server, &mut event);
+            if event.cancelled {
+                return Ok(());
+            }
+            translated_packet = RawPacket {
+                id: event.packet_id,
+                payload: event.payload,
+            };
+            &translated_packet
+        } else {
+            packet
+        };
         let version = CURRENT_MC_VERSION;
 
         let event_payload;
