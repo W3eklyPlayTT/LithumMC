@@ -113,9 +113,9 @@ data/*
 /assets/datapack/
 
 # project's configurations
-lithum.toml
+lithummc.toml
 nethernet-key.der
-.pumpkin-server-id
+.lithummc-server-id
 
 
 *.local.nbt

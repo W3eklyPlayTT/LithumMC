@@ -1,0 +1,34 @@
+[package]
+name = "lithummc-wasm-host-v0_2"
+version.workspace = true
+description = "LithumMC WebAssembly plugin host for API v0.2."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+doctest = false
+
+[dependencies]
+lithummc-core.workspace = true
+lithummc-wasm-host-common.workspace = true
+lithummc-config.workspace = true
+lithummc-data = { workspace = true, features = ["default"] }
+lithummc-inventory.workspace = true
+lithummc-macros.workspace = true
+lithummc-nbt.workspace = true
+lithummc-protocol = { workspace = true, features = ["default"] }
+lithummc-util.workspace = true
+lithummc-world.workspace = true
+bytes.workspace = true
+rand.workspace = true
+serde_json.workspace = true
+sysinfo.workspace = true
+time = { workspace = true, features = ["parsing", "macros", "local-offset"] }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "sync", "time"] }
+tracing.workspace = true
+uuid.workspace = true
+wasmtime = { workspace = true }
+
+[lints]
+workspace = true

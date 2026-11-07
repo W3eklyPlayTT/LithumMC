@@ -1,0 +1,36 @@
+[package]
+name = "lithummc-wasm-host-common"
+version.workspace = true
+description = "Shared plumbing of the LithumMC WebAssembly plugin host."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+doctest = false
+
+[dependencies]
+lithummc-core.workspace = true
+lithummc-data = { workspace = true, features = ["default"] }
+lithummc-inventory.workspace = true
+lithummc-plugin-runtime.workspace = true
+lithummc-util.workspace = true
+lithummc-world.workspace = true
+ed25519-dalek.workspace = true
+hex.workspace = true
+hyper = { workspace = true }
+postcard = { workspace = true }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "sync", "time"] }
+tracing.workspace = true
+tracing-serde-structured = { workspace = true }
+wasm-encoder.workspace = true
+wasmparser.workspace = true
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+
+[lints]
+workspace = true

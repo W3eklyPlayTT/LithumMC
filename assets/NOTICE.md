@@ -8,7 +8,7 @@ This repository contains data files, protocol mappings, and game assets necessar
 * **Files**: `assets/blocks.json`, `assets/items.json`, `assets/entities.json`, `assets/fluids.json`, `assets/properties.json`, and `assets/en_us_java.json`.
 * **Copyright**: © Mojang Studios / Microsoft Corporation.
 * **Terms**: These files are extracted or derived from Minecraft client and server releases. They are provided solely for compatibility, server emulation, and interoperability under the terms of the [Minecraft End User License Agreement (EULA)](https://www.minecraft.net/en-us/eula) and [Mojang Brand and Assets Guidelines](https://www.minecraft.net/en-us/usage-guidelines).
-* **Note**: Vanilla Minecraft data packs and structures are not distributed in this repository; they are downloaded on demand at build and codegen time directly from Mojang's official release servers. These files are **not** licensed under Pumpkin's GPLv3 license and remain the intellectual property of Mojang Studios.
+* **Note**: Vanilla Minecraft data packs and structures are not distributed in this repository; they are downloaded on demand at build and codegen time directly from Mojang's official release servers. These files are **not** licensed under LithumMC's GPLv3 license and remain the intellectual property of Mojang Studios.
 
 ---
 
@@ -28,6 +28,6 @@ This repository contains data files, protocol mappings, and game assets necessar
 
 ---
 
-### 5. Pumpkin Source Code & Plugin API
-* **Server Source Code**: All original Pumpkin server source code, custom tools, and code generators are licensed under the **GNU General Public License v3.0 (GPLv3)** (see the root `LICENSE` file).
-* **Plugin API**: The `pumpkin-plugin-api` and `pumpkin-plugin-wit` crates are dual-licensed under **MIT OR Apache-2.0** to allow plugin authors to use their preferred license.
+### 5. LithumMC Source Code & Plugin API
+* **Server Source Code**: All original LithumMC server source code, custom tools, and code generators are licensed under the **GNU General Public License v3.0 (GPLv3)** (see the root `LICENSE` file).
+* **Plugin API**: The `lithummc-plugin-api` and `lithummc-plugin-wit` crates are dual-licensed under **MIT OR Apache-2.0** to allow plugin authors to use their preferred license.

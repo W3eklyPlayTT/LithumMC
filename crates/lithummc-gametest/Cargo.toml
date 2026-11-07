@@ -1,0 +1,24 @@
+[package]
+name = "lithummc-gametest"
+version.workspace = true
+description = "Minecraft GameTest framework for LithumMC."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+async-trait.workspace = true
+lithummc-data = { workspace = true, features = ["block"] }
+lithummc-macros.workspace = true
+lithummc-nbt.workspace = true
+lithummc-util.workspace = true
+lithummc-world.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt", "macros"] }
+
+[lints]
+workspace = true

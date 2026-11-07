@@ -1,74 +1,76 @@
-# Lithum Server
+# LithumMC
 
-Lithum is a Minecraft Java server built in Rust. This first playable build packages the real game server, world handling, chunk loading, and a sandboxed WebAssembly plugin runtime. The server engine is based on [Pumpkin](https://github.com/Pumpkin-MC/Pumpkin); the Lithum name and package do not mean the engine was rewritten from scratch.
+LithumMC is a Minecraft Java server project written in Rust. The hosting `.jar` is a Java launcher that starts the bundled native server, so Pelican and Pterodactyl can run it with their Java startup command.
 
-## Run the JAR
+This is an early derivative server build with world and chunk handling, configurable gameplay and networking, and a sandboxed WebAssembly plugin runtime. It is not a Paper/Bukkit reimplementation, and Paper, Spigot, Bukkit, and Fabric plugin JARs do not run on LithumMC. Upstream source and license attribution are recorded in [NOTICE.md](NOTICE.md).
 
-1. Install Java 21 or newer.
-2. Put `LithumServer.jar` in a new, empty server folder.
-3. Run `java -jar LithumServer.jar` from that folder.
-4. The first start creates `lithum.toml` and the world files. Review the configuration and restart the server.
-5. Connect with a Java Edition client for Minecraft 26.3 at `localhost:25565`.
+## Run LithumMC
 
-The JAR is a small Java launcher that extracts and starts the bundled Rust server. A locally packaged JAR contains Windows x64 and Linux x64 runtimes; the Linux hosting artifact contains the Linux x64 runtime. It is not a Java reimplementation and does not run on macOS or ARM hosts. The source can also be built as a native server executable.
+Use Java 21 or newer. Place `LithumMC.jar` in the server folder and start it with:
 
-## Pelican and Pterodactyl hosting
+```sh
+java -jar LithumMC.jar
+```
 
-Use the Linux x86_64 `LithumServer.jar` artifact with a Java 21 container. The `Build Lithum Linux server` workflow creates it after changes are pushed to `main` (or when started manually from GitHub Actions). To use the custom Lithum Egg:
+The first launch creates `lithummc.toml` and the world data. The default Java listener is `0.0.0.0:25565`.
 
-1. Download `LithumServer.jar` from the `LithumServer-linux-x86_64` artifact in a successful workflow run.
-2. Ask a panel administrator to import [`deploy/egg-lithum.json`](deploy/egg-lithum.json), then create a Lithum server and select the Java 21 image.
-3. Upload `LithumServer.jar` to the server's root folder.
-4. Start the server. The Egg creates `lithum.toml` with the panel's allocated port before first launch; Lithum fills in the remaining defaults and creates the world files.
+### Change the port
 
-If custom Eggs are unavailable, use a Java 21 Minecraft egg and set its server JAR filename to `LithumServer.jar` (or rename the uploaded file to the filename configured by that egg). Its startup command must run `java -jar <jar-filename>` and the server must use the panel's allocated port.
+For a standalone server, set a port in `lithummc.toml`:
 
-Importing an Egg requires panel administrator access. If the host does not allow Java 21 or a configurable JAR startup command, ask its administrator to enable one.
+```toml
+[networking.java]
+port = 25575
+```
+
+When `SERVER_PORT` is present in the environment, LithumMC uses that allocated port ahead of the config value. Pelican and Pterodactyl provide this variable for the server's assigned allocation, so the same Egg works when the host changes the port.
+
+## Pelican and Pterodactyl
+
+1. Ask a panel administrator to import [`deploy/egg-lithummc.json`](deploy/egg-lithummc.json), then create a LithumMC server using a Java 21 image.
+2. Upload `LithumMC.jar` to the server root.
+3. Start it. The Egg runs `java -jar ./LithumMC.jar`, and LithumMC reads the port allocated by the panel.
+
+If custom Eggs are disabled, use a Java 21 egg, set its server JAR filename to `LithumMC.jar`, and make sure its startup command is `java -jar <filename>`.
+
+## Velocity
+
+LithumMC supports Velocity **modern forwarding**. In `velocity.toml`, set `player-info-forwarding-mode = "modern"` and use the secret stored in Velocity's `forwarding.secret` file. In `lithummc.toml`, configure the backend like this:
+
+```toml
+[networking.java]
+online_mode = false
+
+[networking.proxy]
+enabled = true
+
+[networking.proxy.velocity]
+enabled = true
+secret = "paste-the-same-secret-from-velocity-forwarding.secret"
+```
+
+The secret must match on both sides. Keep the backend inaccessible to direct player connections; modern forwarding adds proxy authentication, while a firewall or host access rule still protects the backend port. See the [Velocity forwarding guide](https://docs.papermc.io/velocity/player-information-forwarding/) and [Velocity security guide](https://docs.papermc.io/velocity/security/).
 
 ## Plugins
 
-Lithum plugins are sandboxed WebAssembly components. Paper, Bukkit, Spigot, and Fabric plugin JARs are not compatible. The `lithum-plugin-api` Rust crate is a Lithum-named compatibility re-export of Pumpkin's permissively licensed plugin API. The initial API/runtime is early and may change.
+LithumMC plugins run as sandboxed WebAssembly components. The [`lithummc-plugin-api` crate](crates/lithummc-plugin-api) exposes the server's current plugin API, and [`examples/hello-lithummc-plugin`](examples/hello-lithummc-plugin) contains a starter example. This API is early and may change.
 
-The example plugin in `examples/hello-lithum-plugin` shows the lifecycle entry point. Build it with a Rust toolchain that has the `wasm32-wasip2` target installed, then put the generated `.wasm` component in the server's `plugins` directory.
+## Build and downloads
 
-## Configuration and performance
+The [LithumMC Linux build workflow](.github/workflows/lithummc-linux.yml) builds an optimized Linux x86_64 server and packages `LithumMC.jar` for Java 21 hosting. It runs on pushes to `main` that change server sources and can also be started manually from GitHub Actions. Download the `LithumMC-linux-x86_64` artifact from a successful run.
 
-Lithum creates `lithum.toml` on first launch. It includes networking, world and chunk handling, lighting, plugin permissions, and other server settings. Chunk generation and lighting use worker threads; the engine also has chunk scheduling and entity-island options. Defaults aim to preserve vanilla behavior, so tune view distance and simulation distance for the host machine and player count.
+To build from source, use Rust 1.97 or newer:
 
-This build does not include a graphical admin panel or a live RAM/TPS dashboard. Server health and performance telemetry are a follow-up feature.
+```sh
+cargo build --locked --release --package lithummc --bin lithummc-server
+```
 
-## Build the Windows JAR
-
-Requirements: Rust 1.97 or newer, the MSVC C++ build tools, and a Java 21+ JDK.
+On Windows, the packaging script also needs the MSVC C++ build tools and a Java 21 JDK:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\build-windows-jar.ps1
 ```
 
-The script writes `dist/LithumServer.jar` and `dist/lithum-server.exe`.
+## License
 
-## Source and license
-
-Lithum includes code from [Pumpkin-MC/Pumpkin](https://github.com/Pumpkin-MC/Pumpkin), used under GPL-3.0. The upstream source commit is recorded in [NOTICE.md](NOTICE.md). The server and this derivative distribution are GPL-3.0; the upstream plugin API and Lithum API compatibility crate are MIT OR Apache-2.0. See the license files in `crates/pumpkin-plugin-api` for those plugin API terms.
-
-## Contributions
-
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## Docs
-
-Pumpkin's documentation can be found at <https://pumpkinmc.org/>
-
-## Communication
-
-Consider joining [our Discord server](https://discord.gg/wT8XjrjKkf) to stay up-to-date on events, updates, and connect with other members.
-
-## Funding
-
-If you want to fund me and help the project, check out the [Donation Page](https://pumpkinmc.org/donate/).
-
-## License & Attribution
-
-* **Pumpkin Server**: Licensed under the [GNU General Public License v3.0 (GPLv3)](LICENSE).
-* **Plugin API (`pumpkin-plugin-api` & `pumpkin-plugin-wit`)**: Dual-licensed under [MIT](crates/pumpkin-plugin-api/LICENSE-MIT) OR [Apache-2.0](crates/pumpkin-plugin-api/LICENSE-APACHE) for maximum flexibility when writing plugins.
-* **Third-Party Assets & Data**: Bedrock mappings, protocol conversion data, and Minecraft assets are subject to their respective licenses and attribution terms. See [assets/NOTICE.md](assets/NOTICE.md) for full details.
+The server is distributed under GPL-3.0. The plugin API is MIT OR Apache-2.0. See [LICENSE](LICENSE), the API license files, and [NOTICE.md](NOTICE.md) for source and third-party attribution.

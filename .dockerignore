@@ -8,7 +8,7 @@
 !/crates/
 !/tools/
 !/assets/
-!/pumpkin.toml
+!/lithummc.toml
 
 # Allow build.rs to read git commit sha
 !/.git

@@ -1,33 +1,33 @@
 [workspace]
 resolver = "3"
 members = [
-    "crates/pumpkin",
-    "crates/pumpkin-core",
-    "crates/pumpkin-api-macros",
-    "crates/pumpkin-auth",
-    "crates/pumpkin-codecs",
-    "crates/pumpkin-command",
-    "crates/pumpkin-config",
-    "crates/pumpkin-data",
-    "crates/pumpkin-scheduler",
-    "crates/pumpkin-gametest",
-    "crates/pumpkin-inventory",
-    "crates/pumpkin-macros",
-    "crates/pumpkin-nbt",
-    "crates/pumpkin-plugin-api",
-    "crates/lithum-plugin-api",
-    "crates/pumpkin-plugin-runtime",
-    "crates/pumpkin-plugin-utils",
-    "crates/pumpkin-protocol",
-    "crates/pumpkin-util",
-    "crates/pumpkin-wasm-host",
-    "crates/pumpkin-wasm-host-common",
-    "crates/pumpkin-wasm-host-v0_1",
-    "crates/pumpkin-wasm-host-v0_2",
-    "crates/pumpkin-world",
-    "tools/pumpkin-codegen",
-    "tools/pumpkin-fuzzer",
-    "tools/pumpkin-tester",
+    "crates/lithummc",
+    "crates/lithummc-core",
+    "crates/lithummc-api-macros",
+    "crates/lithummc-auth",
+    "crates/lithummc-codecs",
+    "crates/lithummc-command",
+    "crates/lithummc-config",
+    "crates/lithummc-data",
+    "crates/lithummc-scheduler",
+    "crates/lithummc-gametest",
+    "crates/lithummc-inventory",
+    "crates/lithummc-macros",
+    "crates/lithummc-nbt",
+    "crates/lithummc-plugin-api",
+    "crates/lithummc-plugin-api-impl",
+    "crates/lithummc-plugin-runtime",
+    "crates/lithummc-plugin-utils",
+    "crates/lithummc-protocol",
+    "crates/lithummc-util",
+    "crates/lithummc-wasm-host",
+    "crates/lithummc-wasm-host-common",
+    "crates/lithummc-wasm-host-v0_1",
+    "crates/lithummc-wasm-host-v0_2",
+    "crates/lithummc-world",
+    "tools/lithummc-codegen",
+    "tools/lithummc-fuzzer",
+    "tools/lithummc-tester",
 ]
 
 # [workspace.lints.rust]
@@ -128,28 +128,28 @@ codegen-units = 1
 
 # The big library crates are mostly LLVM work before LTO. Fat LTO re-optimizes everything at the
 # final link, so splitting their own codegen here only speeds up the build.
-[profile.release.package.pumpkin-data]
+[profile.release.package.lithummc-data]
 codegen-units = 16
 
-[profile.release.package.pumpkin-core]
+[profile.release.package.lithummc-core]
 codegen-units = 16
 
-[profile.release.package.pumpkin-world]
+[profile.release.package.lithummc-world]
 codegen-units = 16
 
-[profile.release.package.pumpkin-protocol]
+[profile.release.package.lithummc-protocol]
 codegen-units = 16
 
-[profile.release.package.pumpkin-wasm-host]
+[profile.release.package.lithummc-wasm-host]
 codegen-units = 16
 
-[profile.release.package.pumpkin-wasm-host-common]
+[profile.release.package.lithummc-wasm-host-common]
 codegen-units = 16
 
-[profile.release.package.pumpkin-wasm-host-v0_1]
+[profile.release.package.lithummc-wasm-host-v0_1]
 codegen-units = 16
 
-[profile.release.package.pumpkin-wasm-host-v0_2]
+[profile.release.package.lithummc-wasm-host-v0_2]
 codegen-units = 16
 
 [profile.bench]
@@ -206,27 +206,27 @@ num-traits = { version = "0.2", default-features = false, features = ["std"] }
 p384 = { version = "0.14.0", default-features = false, features = ["std", "arithmetic", "pkcs8"] }
 phf = { version = "0.14.0", default-features = false, features = ["std"] }
 proc-macro2 = { version = "1.0", default-features = false, features = ["proc-macro"] }
-pumpkin-api-macros = { path = "crates/pumpkin-api-macros", default-features = false }
-pumpkin-auth = { path = "crates/pumpkin-auth", default-features = false }
-pumpkin-codecs = { path = "crates/pumpkin-codecs", default-features = false }
-pumpkin-command = { path = "crates/pumpkin-command", default-features = false }
-pumpkin-config = { path = "crates/pumpkin-config", default-features = false }
-pumpkin-core = { path = "crates/pumpkin-core", default-features = false }
-pumpkin-data = { path = "crates/pumpkin-data", default-features = false }
-pumpkin-gametest = { path = "crates/pumpkin-gametest", default-features = false }
-pumpkin-inventory = { path = "crates/pumpkin-inventory", default-features = false }
-pumpkin-macros = { path = "crates/pumpkin-macros", default-features = false }
-pumpkin-nbt = { path = "crates/pumpkin-nbt", default-features = false }
-pumpkin-plugin-api = { path = "crates/pumpkin-plugin-api", default-features = false }
-pumpkin-plugin-runtime = { path = "crates/pumpkin-plugin-runtime", default-features = false }
-pumpkin-plugin-utils = { path = "crates/pumpkin-plugin-utils", default-features = false }
-pumpkin-protocol = { path = "crates/pumpkin-protocol", default-features = false }
-pumpkin-util = { path = "crates/pumpkin-util", default-features = false }
-pumpkin-wasm-host = { path = "crates/pumpkin-wasm-host", default-features = false }
-pumpkin-wasm-host-common = { path = "crates/pumpkin-wasm-host-common", default-features = false }
-pumpkin-wasm-host-v0_1 = { path = "crates/pumpkin-wasm-host-v0_1", default-features = false }
-pumpkin-wasm-host-v0_2 = { path = "crates/pumpkin-wasm-host-v0_2", default-features = false }
-pumpkin-world = { path = "crates/pumpkin-world", default-features = false }
+lithummc-api-macros = { path = "crates/lithummc-api-macros", default-features = false }
+lithummc-auth = { path = "crates/lithummc-auth", default-features = false }
+lithummc-codecs = { path = "crates/lithummc-codecs", default-features = false }
+lithummc-command = { path = "crates/lithummc-command", default-features = false }
+lithummc-config = { path = "crates/lithummc-config", default-features = false }
+lithummc-core = { path = "crates/lithummc-core", default-features = false }
+lithummc-data = { path = "crates/lithummc-data", default-features = false }
+lithummc-gametest = { path = "crates/lithummc-gametest", default-features = false }
+lithummc-inventory = { path = "crates/lithummc-inventory", default-features = false }
+lithummc-macros = { path = "crates/lithummc-macros", default-features = false }
+lithummc-nbt = { path = "crates/lithummc-nbt", default-features = false }
+lithummc-plugin-api = { path = "crates/lithummc-plugin-api", default-features = false }
+lithummc-plugin-runtime = { path = "crates/lithummc-plugin-runtime", default-features = false }
+lithummc-plugin-utils = { path = "crates/lithummc-plugin-utils", default-features = false }
+lithummc-protocol = { path = "crates/lithummc-protocol", default-features = false }
+lithummc-util = { path = "crates/lithummc-util", default-features = false }
+lithummc-wasm-host = { path = "crates/lithummc-wasm-host", default-features = false }
+lithummc-wasm-host-common = { path = "crates/lithummc-wasm-host-common", default-features = false }
+lithummc-wasm-host-v0_1 = { path = "crates/lithummc-wasm-host-v0_1", default-features = false }
+lithummc-wasm-host-v0_2 = { path = "crates/lithummc-wasm-host-v0_2", default-features = false }
+lithummc-world = { path = "crates/lithummc-world", default-features = false }
 quote = { version = "1.0", default-features = false, features = ["proc-macro"] }
 rand = { version = "0.10.3", default-features = false, features = ["std", "std_rng", "thread_rng"] }
 rsa = { version = "=0.10.0-rc.19", default-features = false, features = ["std", "encoding"] }

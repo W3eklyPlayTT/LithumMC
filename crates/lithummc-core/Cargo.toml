@@ -1,0 +1,116 @@
+[package]
+name = "lithummc-core"
+version.workspace = true
+description = "Empowering everyone to host fast and efficient Minecraft servers."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+# Required to expose lithummc plugin API
+[lib]
+doctest = false
+
+[dependencies]
+# lithummc
+arc-swap.workspace = true
+rayon.workspace = true
+lithummc-util.workspace = true
+lithummc-auth.workspace = true
+lithummc-nbt.workspace = true
+lithummc-config.workspace = true
+lithummc-command.workspace = true
+lithummc-inventory.workspace = true
+lithummc-world.workspace = true
+lithummc-data = { workspace = true, features = ["default"] }
+lithummc-protocol = { workspace = true, features = ["default"] }
+lithummc-macros.workspace = true
+lithummc-gametest = { path = "../lithummc-gametest" }
+
+dashmap.workspace = true
+crossbeam.workspace = true
+uuid.workspace = true
+tokio = { workspace = true, features = [
+    "macros",
+    "net",
+    "rt-multi-thread",
+    "sync",
+    "fs",
+    "io-util",
+    "time",
+] }
+thiserror.workspace = true
+futures.workspace = true
+notify.workspace = true
+
+# config
+serde.workspace = true
+serde_repr.workspace = true
+serde_json.workspace = true
+
+colored.workspace = true
+
+bytes.workspace = true
+
+rand.workspace = true
+
+# Console line reading
+rustyline.workspace = true
+
+# encryption
+aes.workspace = true
+rsa.workspace = true
+
+# verification & WASM parsing
+ed25519-dalek.workspace = true
+hex.workspace = true
+
+# authentication
+reqwest = { workspace = true, features = ["json"] }
+rustls.workspace = true
+
+sha1.workspace = true
+
+# velocity en
+hmac.workspace = true
+sha2.workspace = true
+
+base64.workspace = true
+
+# logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+time = { workspace = true, features = ["parsing", "macros", "local-offset"] }
+
+# plugins
+libloading.workspace = true
+rustc-hash.workspace = true
+
+# Task handling
+tokio-util = { workspace = true, features = ["rt"] }
+
+# System details & Rustc version
+libc = { workspace = true }
+sysinfo.workspace = true
+
+flate2.workspace = true
+
+axum = { workspace = true, features = ["ws"] }
+subtle.workspace = true
+webrtc.workspace = true
+async-trait.workspace = true
+
+
+bitflags = { workspace = true }
+png = { version = "0.18.1", default-features = false }
+
+indexmap.workspace = true
+xxhash-rust.workspace = true
+
+
+[dev-dependencies]
+tempfile.workspace = true
+tokio = { workspace = true, features = ["test-util"] }
+
+[lints]
+workspace = true

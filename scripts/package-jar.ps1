@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $outputDirectory = Join-Path $repoRoot "dist"
-$windowsServer = Join-Path $outputDirectory "lithum-server.exe"
-$linuxServer = Join-Path $outputDirectory "linux-x86_64\lithum-server-linux-x86_64"
+$windowsServer = Join-Path $outputDirectory "lithummc-server.exe"
+$linuxServer = Join-Path $outputDirectory "lithummc-server-linux-x86_64"
 $javacCommand = Get-Command javac -ErrorAction SilentlyContinue
 
 if (-not $javacCommand) {
@@ -13,7 +13,7 @@ if (-not (Test-Path -LiteralPath $windowsServer -PathType Leaf)) {
     throw "The Windows server executable is missing at $windowsServer. Build it first."
 }
 if (-not (Test-Path -LiteralPath $linuxServer -PathType Leaf)) {
-    throw "The Linux server executable is missing at $linuxServer. Download the LithumServer-linux-x86_64 Actions artifact first."
+    throw "The Linux server executable is missing at $linuxServer. Download the LithumMC-linux-x86_64 Actions artifact first."
 }
 
 $stage = Join-Path (Join-Path $repoRoot "target") ("jar-stage-" + [Guid]::NewGuid().ToString("N"))
@@ -23,20 +23,20 @@ New-Item -ItemType Directory -Path $native -Force | Out-Null
 
 Push-Location $repoRoot
 try {
-    & $javacCommand.Source -d $classes (Join-Path $repoRoot "jar-launcher\LithumLauncher.java")
+    & $javacCommand.Source -d $classes (Join-Path $repoRoot "jar-launcher\LithumMCLauncher.java")
     if ($LASTEXITCODE -ne 0) {
-        throw "The Lithum JAR launcher compilation failed with exit code $LASTEXITCODE."
+        throw "The LithumMC JAR launcher compilation failed with exit code $LASTEXITCODE."
     }
 
-    Copy-Item -LiteralPath $windowsServer -Destination (Join-Path $native "lithum-server.exe")
-    Copy-Item -LiteralPath $linuxServer -Destination (Join-Path $native "lithum-server-linux-x86_64")
+    Copy-Item -LiteralPath $windowsServer -Destination (Join-Path $native "lithummc-server.exe")
+    Copy-Item -LiteralPath $linuxServer -Destination (Join-Path $native "lithummc-server-linux-x86_64")
 
     $metaInf = Join-Path $stage "META-INF"
     New-Item -ItemType Directory -Path $metaInf -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $repoRoot "jar-launcher\MANIFEST.MF") `
         -Destination (Join-Path $metaInf "MANIFEST.MF")
 
-    $jarPath = Join-Path $outputDirectory "LithumServer.jar"
+    $jarPath = Join-Path $outputDirectory "LithumMC.jar"
     if (Test-Path -LiteralPath $jarPath) {
         Remove-Item -LiteralPath $jarPath -Force
     }
@@ -48,7 +48,8 @@ try {
         $false
     )
 
-    Get-FileHash -LiteralPath $jarPath -Algorithm SHA256 | Select-Object Algorithm,Hash,Path | Format-List
+    $hash = (Get-FileHash -LiteralPath $jarPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    "$hash  LithumMC.jar" | Set-Content -LiteralPath "$jarPath.sha256" -Encoding ascii
     Write-Host "Built $jarPath with Windows x86_64 and Linux x86_64 server runtimes."
 } finally {
     Pop-Location

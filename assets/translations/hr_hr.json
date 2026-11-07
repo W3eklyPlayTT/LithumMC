@@ -1,12 +1,12 @@
 {
-    "commands.pumpkin.version": "Pumpkin %s\n",
-    "commands.pumpkin.description": "Omogućuje svima pokretanje brzih \ni učinkovitih Minecraft servera.\n",
-    "commands.pumpkin.minecraft_version": "(Minecraft %s, Protokol %s)\n",
-    "commands.pumpkin.github": "[GitHub Repozitorij]",
-    "commands.pumpkin.website": "[Web-stranica]",
-    "commands.pumpkin.version.hover": "Klikni za kopiranje verzije",
-    "commands.pumpkin.description.hover": "Klikni za kopiranje opisa",
-    "commands.pumpkin.minecraft_version.hover": "Klikni za kopiranje Minecraft verzije",
-    "commands.pumpkin.github.hover": "Klikni za otvaranje repozitorija.",
-    "commands.pumpkin.website.hover": "Klikni za otvaranje stranice."
+    "commands.lithummc.version": "LithumMC %s\n",
+    "commands.lithummc.description": "Omogućuje svima pokretanje brzih \ni učinkovitih Minecraft servera.\n",
+    "commands.lithummc.minecraft_version": "(Minecraft %s, Protokol %s)\n",
+    "commands.lithummc.github": "[GitHub Repozitorij]",
+    "commands.lithummc.website": "[Web-stranica]",
+    "commands.lithummc.version.hover": "Klikni za kopiranje verzije",
+    "commands.lithummc.description.hover": "Klikni za kopiranje opisa",
+    "commands.lithummc.minecraft_version.hover": "Klikni za kopiranje Minecraft verzije",
+    "commands.lithummc.github.hover": "Klikni za otvaranje repozitorija.",
+    "commands.lithummc.website.hover": "Klikni za otvaranje stranice."
 }

@@ -2190,10 +2190,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae"
 
 [[package]]
-name = "lithum-plugin-api"
+name = "lithummc-plugin-api"
 version = "0.1.0"
 dependencies = [
- "pumpkin-plugin-api",
+ "lithummc-plugin-api-impl",
 ]
 
 [[package]]
@@ -2937,16 +2937,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin"
+name = "lithummc"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "console-subscriber",
- "pumpkin-config",
- "pumpkin-core",
- "pumpkin-data",
- "pumpkin-util",
- "pumpkin-wasm-host",
- "pumpkin-world",
+ "lithummc-config",
+ "lithummc-core",
+ "lithummc-data",
+ "lithummc-util",
+ "lithummc-wasm-host",
+ "lithummc-world",
  "rayon",
  "rustls",
  "tokio",
@@ -2954,7 +2954,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-api-macros"
+name = "lithummc-api-macros"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "proc-macro-error2",
@@ -2964,7 +2964,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-auth"
+name = "lithummc-auth"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "base64 0.23.1",
@@ -2984,7 +2984,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-codecs"
+name = "lithummc-codecs"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "serde_json",
@@ -2992,15 +2992,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-codegen"
+name = "lithummc-codegen"
 version = "0.1.0-dev+26.1"
 dependencies = [
  "heck",
  "indexmap",
  "md5",
  "proc-macro2",
- "pumpkin-nbt",
- "pumpkin-util",
+ "lithummc-nbt",
+ "lithummc-util",
  "quote",
  "rayon",
  "semver",
@@ -3012,14 +3012,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-command"
+name = "lithummc-command"
 version = "0.2.1+26.3-26.60"
 dependencies = [
- "pumpkin-codecs",
- "pumpkin-data",
- "pumpkin-nbt",
- "pumpkin-protocol",
- "pumpkin-util",
+ "lithummc-codecs",
+ "lithummc-data",
+ "lithummc-nbt",
+ "lithummc-protocol",
+ "lithummc-util",
  "rustc-hash",
  "serde_json",
  "tracing",
@@ -3027,10 +3027,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-config"
+name = "lithummc-config"
 version = "0.2.1+26.3-26.60"
 dependencies = [
- "pumpkin-util",
+ "lithummc-util",
  "rand 0.10.3",
  "serde",
  "toml",
@@ -3039,7 +3039,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-core"
+name = "lithummc-core"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "aes 0.9.3",
@@ -3062,17 +3062,17 @@ dependencies = [
  "libloading",
  "notify",
  "png",
- "pumpkin-auth",
- "pumpkin-command",
- "pumpkin-config",
- "pumpkin-data",
- "pumpkin-gametest",
- "pumpkin-inventory",
- "pumpkin-macros",
- "pumpkin-nbt",
- "pumpkin-protocol",
- "pumpkin-util",
- "pumpkin-world",
+ "lithummc-auth",
+ "lithummc-command",
+ "lithummc-config",
+ "lithummc-data",
+ "lithummc-gametest",
+ "lithummc-inventory",
+ "lithummc-macros",
+ "lithummc-nbt",
+ "lithummc-protocol",
+ "lithummc-util",
+ "lithummc-world",
  "rand 0.10.3",
  "rayon",
  "reqwest",
@@ -3100,15 +3100,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-data"
+name = "lithummc-data"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "crc32c",
  "criterion",
  "flate2",
  "phf",
- "pumpkin-nbt",
- "pumpkin-util",
+ "lithummc-nbt",
+ "lithummc-util",
  "rand 0.10.3",
  "reqwest",
  "rustls",
@@ -3118,7 +3118,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-fuzzer"
+name = "lithummc-fuzzer"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "clap",
@@ -3128,15 +3128,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-gametest"
+name = "lithummc-gametest"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "async-trait",
- "pumpkin-data",
- "pumpkin-macros",
- "pumpkin-nbt",
- "pumpkin-util",
- "pumpkin-world",
+ "lithummc-data",
+ "lithummc-macros",
+ "lithummc-nbt",
+ "lithummc-util",
+ "lithummc-world",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -3144,13 +3144,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-inventory"
+name = "lithummc-inventory"
 version = "0.2.1+26.3-26.60"
 dependencies = [
- "pumpkin-data",
- "pumpkin-nbt",
- "pumpkin-protocol",
- "pumpkin-util",
+ "lithummc-data",
+ "lithummc-nbt",
+ "lithummc-protocol",
+ "lithummc-util",
  "rand 0.10.3",
  "rustc-hash",
  "thiserror 2.0.21",
@@ -3158,7 +3158,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-macros"
+name = "lithummc-macros"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "heck",
@@ -3169,13 +3169,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-nbt"
+name = "lithummc-nbt"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "bytes",
  "criterion",
  "flate2",
- "pumpkin-codecs",
+ "lithummc-codecs",
  "tempfile",
  "thiserror 2.0.21",
  "tracing",
@@ -3183,7 +3183,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-plugin-api"
+name = "lithummc-plugin-api-impl"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "postcard",
@@ -3194,7 +3194,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-plugin-runtime"
+name = "lithummc-plugin-runtime"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "futures",
@@ -3206,10 +3206,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-plugin-utils"
+name = "lithummc-plugin-utils"
 version = "0.2.1+26.3-26.60"
 dependencies = [
- "pumpkin-plugin-api",
+ "lithummc-plugin-api",
  "reqwest",
  "rustls",
  "serde",
@@ -3221,7 +3221,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-protocol"
+name = "lithummc-protocol"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "aes 0.9.3",
@@ -3231,10 +3231,10 @@ dependencies = [
  "cfb8",
  "flate2",
  "hybrid-array",
- "pumpkin-data",
- "pumpkin-macros",
- "pumpkin-nbt",
- "pumpkin-util",
+ "lithummc-data",
+ "lithummc-macros",
+ "lithummc-nbt",
+ "lithummc-util",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -3243,7 +3243,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-scheduler"
+name = "lithummc-scheduler"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "futures",
@@ -3253,16 +3253,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-tester"
+name = "lithummc-tester"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "bytes",
- "pumpkin-config",
- "pumpkin-core",
- "pumpkin-data",
- "pumpkin-gametest",
- "pumpkin-protocol",
- "pumpkin-util",
+ "lithummc-config",
+ "lithummc-core",
+ "lithummc-data",
+ "lithummc-gametest",
+ "lithummc-protocol",
+ "lithummc-util",
  "rayon",
  "rustls",
  "serde_json",
@@ -3273,7 +3273,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-util"
+name = "lithummc-util"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "bytes",
@@ -3283,8 +3283,8 @@ dependencies = [
  "md5",
  "num-traits",
  "proc-macro2",
- "pumpkin-codecs",
- "pumpkin-nbt",
+ "lithummc-codecs",
+ "lithummc-nbt",
  "quote",
  "serde",
  "serde_json",
@@ -3294,14 +3294,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-wasm-host"
+name = "lithummc-wasm-host"
 version = "0.2.1+26.3-26.60"
 dependencies = [
- "pumpkin-core",
- "pumpkin-plugin-runtime",
- "pumpkin-wasm-host-common",
- "pumpkin-wasm-host-v0_1",
- "pumpkin-wasm-host-v0_2",
+ "lithummc-core",
+ "lithummc-plugin-runtime",
+ "lithummc-wasm-host-common",
+ "lithummc-wasm-host-v0_1",
+ "lithummc-wasm-host-v0_2",
  "tempfile",
  "tokio",
  "tracing",
@@ -3312,20 +3312,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-wasm-host-common"
+name = "lithummc-wasm-host-common"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "ed25519-dalek",
  "hex",
  "hyper",
  "postcard",
- "pumpkin-auth",
- "pumpkin-core",
- "pumpkin-data",
- "pumpkin-inventory",
- "pumpkin-plugin-runtime",
- "pumpkin-util",
- "pumpkin-world",
+ "lithummc-core",
+ "lithummc-data",
+ "lithummc-inventory",
+ "lithummc-plugin-runtime",
+ "lithummc-util",
+ "lithummc-world",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -3340,20 +3339,20 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-wasm-host-v0_1"
+name = "lithummc-wasm-host-v0_1"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "bytes",
- "pumpkin-config",
- "pumpkin-core",
- "pumpkin-data",
- "pumpkin-inventory",
- "pumpkin-macros",
- "pumpkin-nbt",
- "pumpkin-protocol",
- "pumpkin-util",
- "pumpkin-wasm-host-common",
- "pumpkin-world",
+ "lithummc-config",
+ "lithummc-core",
+ "lithummc-data",
+ "lithummc-inventory",
+ "lithummc-macros",
+ "lithummc-nbt",
+ "lithummc-protocol",
+ "lithummc-util",
+ "lithummc-wasm-host-common",
+ "lithummc-world",
  "rand 0.10.3",
  "serde_json",
  "sysinfo",
@@ -3365,20 +3364,20 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-wasm-host-v0_2"
+name = "lithummc-wasm-host-v0_2"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "bytes",
- "pumpkin-config",
- "pumpkin-core",
- "pumpkin-data",
- "pumpkin-inventory",
- "pumpkin-macros",
- "pumpkin-nbt",
- "pumpkin-protocol",
- "pumpkin-util",
- "pumpkin-wasm-host-common",
- "pumpkin-world",
+ "lithummc-config",
+ "lithummc-core",
+ "lithummc-data",
+ "lithummc-inventory",
+ "lithummc-macros",
+ "lithummc-nbt",
+ "lithummc-protocol",
+ "lithummc-util",
+ "lithummc-wasm-host-common",
+ "lithummc-world",
  "rand 0.10.3",
  "serde_json",
  "sysinfo",
@@ -3390,7 +3389,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pumpkin-world"
+name = "lithummc-world"
 version = "0.2.1+26.3-26.60"
 dependencies = [
  "arc-swap",
@@ -3403,10 +3402,10 @@ dependencies = [
  "futures",
  "lz4-java-wrc",
  "md5",
- "pumpkin-config",
- "pumpkin-data",
- "pumpkin-nbt",
- "pumpkin-util",
+ "lithummc-config",
+ "lithummc-data",
+ "lithummc-nbt",
+ "lithummc-util",
  "rand 0.10.3",
  "rayon",
  "rustc-hash",

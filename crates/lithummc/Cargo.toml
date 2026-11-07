@@ -1,0 +1,40 @@
+[package]
+name = "lithummc"
+version.workspace = true
+description = "Empowering everyone to host fast and efficient Minecraft servers."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+autobins = false
+
+[[bin]]
+name = "lithummc-server"
+path = "src/main.rs"
+
+[package.metadata.tauri-winres]
+# FileDescription is handled as the Program name by Windows!
+FileDescription = "LithumMC Minecraft Server"
+OriginalFilename = "lithummc-server.exe"
+LegalCopyright = "LithumMC contributors; includes LithumMC GPL-3.0 code"
+
+[dependencies]
+lithummc-core.workspace = true
+lithummc-wasm-host.workspace = true
+lithummc-config.workspace = true
+lithummc-data = { workspace = true, features = ["default"] }
+lithummc-util.workspace = true
+lithummc-world.workspace = true
+
+rayon.workspace = true
+rustls.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
+tracing.workspace = true
+console-subscriber = { workspace = true, optional = true }
+
+[features]
+console-subscriber = ["dep:console-subscriber"]
+# Load plugins built against the v0.2 API. Off until the v0.2 ABI is finished.
+plugin-v0_2 = ["lithummc-wasm-host/v0_2"]
+
+[lints]
+workspace = true

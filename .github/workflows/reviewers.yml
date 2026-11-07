@@ -23,35 +23,35 @@ jobs:
         with:
           script: |
             const rules = [
-              { pattern: 'crates/pumpkin-protocol/', reviewers: ['Snowiiii', 'xRookieFight'] },
-              { pattern: 'crates/pumpkin-core/src/net/', reviewers: ['Snowiiii', 'xRookieFight'] },
+              { pattern: 'crates/lithummc-protocol/', reviewers: ['Snowiiii', 'xRookieFight'] },
+              { pattern: 'crates/lithummc-core/src/net/', reviewers: ['Snowiiii', 'xRookieFight'] },
 
               { pattern: 'assets/bedrock/', reviewers: ['ZlordHUN', 'xRookieFight'] },
-              { pattern: 'crates/pumpkin-protocol/src/bedrock/', reviewers: ['ZlordHUN', 'xRookieFight', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-core/src/net/bedrock/', reviewers: ['ZlordHUN', 'xRookieFight', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-protocol/src/bedrock/', reviewers: ['ZlordHUN', 'xRookieFight', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-core/src/net/bedrock/', reviewers: ['ZlordHUN', 'xRookieFight', 'QuantumSegfault'] },
 
-              { pattern: 'crates/pumpkin-core/src/command/', reviewers: ['aure31'] },
+              { pattern: 'crates/lithummc-core/src/command/', reviewers: ['aure31'] },
 
-              { pattern: 'crates/pumpkin-plugin-api/', reviewers: ['vyPal', 'yunuservices'] },
-              { pattern: 'crates/pumpkin-plugin-wit/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-api-macros/', reviewers: ['vyPal', 'yunuservices'] },
-              { pattern: 'crates/pumpkin-core/src/plugin/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-wasm-host/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-wasm-host-common/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-wasm-host-v0_1/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
-              { pattern: 'crates/pumpkin-wasm-host-v0_2/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-plugin-api/', reviewers: ['vyPal', 'yunuservices'] },
+              { pattern: 'crates/lithummc-plugin-wit/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-api-macros/', reviewers: ['vyPal', 'yunuservices'] },
+              { pattern: 'crates/lithummc-core/src/plugin/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-wasm-host/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-wasm-host-common/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-wasm-host-v0_1/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
+              { pattern: 'crates/lithummc-wasm-host-v0_2/', reviewers: ['vyPal', 'yunuservices', 'QuantumSegfault'] },
 
               { pattern: '*.md', reviewers: ['Q2297045667'] },
               { pattern: 'docs/', reviewers: ['Q2297045667'] },
 
-              { pattern: 'crates/pumpkin-core/src/entity/mob/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
-              { pattern: 'crates/pumpkin-core/src/entity/projectile/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
+              { pattern: 'crates/lithummc-core/src/entity/mob/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
+              { pattern: 'crates/lithummc-core/src/entity/projectile/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
 
-              { pattern: 'crates/pumpkin-core/src/block/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
-              { pattern: 'crates/pumpkin-core/src/item/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
+              { pattern: 'crates/lithummc-core/src/block/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
+              { pattern: 'crates/lithummc-core/src/item/', reviewers: ['Snowiiii', 'RoosterBooster007'] },
 
-              { pattern: 'crates/pumpkin-world/src/generation/feature/', reviewers: ['Snowiiii', 'RoosterBooster007', 'MegalithOfficial'] },
-              { pattern: 'crates/pumpkin-world/src/generation/noise/', reviewers: ['Snowiiii', 'RoosterBooster007', 'MegalithOfficial'] },
+              { pattern: 'crates/lithummc-world/src/generation/feature/', reviewers: ['Snowiiii', 'RoosterBooster007', 'MegalithOfficial'] },
+              { pattern: 'crates/lithummc-world/src/generation/noise/', reviewers: ['Snowiiii', 'RoosterBooster007', 'MegalithOfficial'] },
               { pattern: '.github/workflows/', reviewers: ['Snowiiii'] },
             ];
 
@@ -87,7 +87,7 @@ jobs:
             }
 
             const mentionList = [...reviewers].sort().map((reviewer) => `@${reviewer}`);
-            const marker = '<!-- pumpkin-reviewers -->';
+            const marker = '<!-- lithummc-reviewers -->';
             const body = [
               marker,
               'Review requested from:',

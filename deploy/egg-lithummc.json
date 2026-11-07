@@ -1,0 +1,32 @@
+{
+  "_comment": "Custom LithumMC egg for Pelican and Pterodactyl panels. Import through the panel administrator, choose a Java 21 image, then upload LithumMC.jar to the server root.",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-11-07T00:00:00+00:00",
+  "name": "LithumMC",
+  "author": "LithumMC contributors",
+  "description": "LithumMC Minecraft server for Linux x86_64. Choose a Java 21 image and upload LithumMC.jar to the server root after installation.",
+  "features": null,
+  "docker_images": {
+    "Pelican Java 21": "ghcr.io/pelican-eggs/yolks:java_21",
+    "Pterodactyl Java 21": "ghcr.io/pterodactyl/yolks:java_21"
+  },
+  "file_denylist": [],
+  "startup": "exec java -jar ./LithumMC.jar",
+  "config": {
+    "files": "{}",
+    "startup": "{\n  \"done\": \"Server is now running.\"\n}",
+    "logs": "{}",
+    "stop": "stop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -e\nmkdir -p /mnt/server\necho 'LithumMC egg installed. Upload LithumMC.jar to the server root before starting.'\n",
+      "container": "ghcr.io/pterodactyl/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": []
+}

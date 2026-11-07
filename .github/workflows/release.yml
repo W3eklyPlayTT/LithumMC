@@ -64,23 +64,23 @@ jobs:
           mkdir -p dist
           EXT=""
           if [ "${{ runner.os }}" == "Windows" ]; then EXT=".exe"; fi
-          cp "target/release/pumpkin$EXT" "dist/pumpkin-${{ matrix.arch }}-${{ runner.os }}$EXT"
+          cp "target/release/lithummc$EXT" "dist/lithummc-${{ matrix.arch }}-${{ runner.os }}$EXT"
 
       - name: Upload unsigned Windows executable
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v7
         with:
           name: unsigned-${{ matrix.arch }}-${{ runner.os }}
-          path: dist/pumpkin-*
+          path: dist/lithummc-*
           retention-days: 14
 
       - name: Export executable
         if: runner.os != 'Windows'
         uses: actions/upload-artifact@v7
         with:
-          name: pumpkin-${{ matrix.arch }}-${{ runner.os }}
+          name: lithummc-${{ matrix.arch }}-${{ runner.os }}
           compression-level: 9
-          path: dist/pumpkin-*
+          path: dist/lithummc-*
 
   sign_windows_release:
     name: Sign Windows release
@@ -125,9 +125,9 @@ jobs:
       - name: Export signed executable
         uses: actions/upload-artifact@v7
         with:
-          name: pumpkin-${{ matrix.arch }}-${{ runner.os }}
+          name: lithummc-${{ matrix.arch }}-${{ runner.os }}
           compression-level: 9
-          path: dist/pumpkin-*
+          path: dist/lithummc-*
 
   build_android_release:
     name: Build project in release for Android (AArch64)
@@ -153,13 +153,13 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist
-          cp "target/aarch64-linux-android/release/pumpkin" "dist/pumpkin-aarch64-android"
+          cp "target/aarch64-linux-android/release/lithummc" "dist/lithummc-aarch64-android"
       - name: Export executable
         uses: actions/upload-artifact@v7
         with:
-          name: pumpkin-aarch64-android
+          name: lithummc-aarch64-android
           compression-level: 9
-          path: dist/pumpkin-aarch64-android
+          path: dist/lithummc-aarch64-android
 
   publish_release:
     name: Publish GitHub Release
@@ -190,7 +190,7 @@ jobs:
       - name: Download prebuilt binary artifacts
         uses: actions/download-artifact@v8
         with:
-          pattern: "pumpkin-*"
+          pattern: "lithummc-*"
           path: dist/
           merge-multiple: true
 
@@ -198,7 +198,7 @@ jobs:
         shell: bash
         run: |
           cd dist
-          sha256sum pumpkin-* > checksums.sha256
+          sha256sum lithummc-* > checksums.sha256
           cat checksums.sha256
 
       - name: Create GitHub Release
@@ -207,6 +207,6 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag_name }}
           name: Release ${{ steps.tag.outputs.tag_name }}
           files: |
-            dist/pumpkin*
+            dist/lithummc*
             dist/checksums.sha256
           generate_release_notes: true

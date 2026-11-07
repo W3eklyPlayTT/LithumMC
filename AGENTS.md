@@ -1,27 +1,27 @@
 # AGENTS.md
 
-Notes for coding agents working on Pumpkin. Humans are welcome to read it too. [CONTRIBUTING.md](CONTRIBUTING.md) still applies. If a maintainer or the person you're working for tells you something different from this file, do what they say, with one exception: agents never open pull requests, even when asked. See the last section.
+Notes for coding agents working on LithumMC. Humans are welcome to read it too. [CONTRIBUTING.md](CONTRIBUTING.md) still applies. If a maintainer or the person you're working for tells you something different from this file, do what they say, with one exception: agents never open pull requests, even when asked. See the last section.
 
-## What Pumpkin is
+## What LithumMC is
 
-Pumpkin is a Minecraft server written from scratch in Rust. It aims to behave like the official (vanilla) Java Edition server while running faster and on more threads. It isn't a fork of the Java code and it can't load Bukkit or Fabric plugins; it has its own native and Wasm plugin APIs.
+LithumMC is a Minecraft server written from scratch in Rust. It aims to behave like the official (vanilla) Java Edition server while running faster and on more threads. It isn't a fork of the Java code and it can't load Bukkit or Fabric plugins; it has its own native and Wasm plugin APIs.
 
 Things worth knowing before you start:
 
-- Java protocol support targets one version at a time. `CURRENT_MC_VERSION` and `LOWEST_SUPPORTED_MC_VERSION` in `crates/pumpkin-data/src/generated/packet.rs` say which. Older clients are handled by plugins. Bedrock has a separate implementation that is still in progress.
+- Java protocol support targets one version at a time. `CURRENT_MC_VERSION` and `LOWEST_SUPPORTED_MC_VERSION` in `crates/lithummc-data/src/generated/packet.rs` say which. Older clients are handled by plugins. Bedrock has a separate implementation that is still in progress.
 - Game logic (block, item, entity and AI behaviour) runs synchronously inside the tick. Networking, disk I/O, plugins and events are async on Tokio. CPU-heavy work such as chunk generation and lighting runs on Rayon.
-- Chunk loading, world generation, lighting and saves live in `pumpkin-world`.
-- Pumpkin deliberately differs from vanilla in a few places. The most important one is that the player's own movement is client authoritative. A change that is correct against the Java code can still break an assumption like that, so check how Pumpkin already handles the thing you're touching.
+- Chunk loading, world generation, lighting and saves live in `lithummc-world`.
+- LithumMC deliberately differs from vanilla in a few places. The most important one is that the player's own movement is client authoritative. A change that is correct against the Java code can still break an assumption like that, so check how LithumMC already handles the thing you're touching.
 
 ## Layout
 
-Crates live in `crates/` and are named after what they do (`pumpkin-world` for chunks and generation, `pumpkin-protocol` for packets, and so on). `crates/pumpkin-core` is the server itself, `crates/pumpkin-wasm-host` (with `-common`, `-v0_1` and `-v0_2`) is the Wasm plugin host, and `crates/pumpkin` is the binary that wires them together. `assets/` holds the extracted vanilla data and `tools/pumpkin-codegen` turns it into `pumpkin-data`. The server is GPL-3.0; the plugin crates have their own licenses (see Plugin API below).
+Crates live in `crates/` and are named after what they do (`lithummc-world` for chunks and generation, `lithummc-protocol` for packets, and so on). `crates/lithummc-core` is the server itself, `crates/lithummc-wasm-host` (with `-common`, `-v0_1` and `-v0_2`) is the Wasm plugin host, and `crates/lithummc` is the binary that wires them together. `assets/` holds the extracted vanilla data and `tools/lithummc-codegen` turns it into `lithummc-data`. The server is GPL-3.0; the plugin crates have their own licenses (see Plugin API below).
 
 Some directories have their own `AGENTS.md` with details for that area. Read it when you work there:
 
-- `crates/pumpkin-protocol/AGENTS.md`: adding and changing packets.
-- `crates/pumpkin-world/AGENTS.md`: chunk loading, world generation and how to check it against vanilla.
-- `tools/pumpkin-codegen/AGENTS.md`: generators, regenerating and generated-file churn.
+- `crates/lithummc-protocol/AGENTS.md`: adding and changing packets.
+- `crates/lithummc-world/AGENTS.md`: chunk loading, world generation and how to check it against vanilla.
+- `tools/lithummc-codegen/AGENTS.md`: generators, regenerating and generated-file churn.
 
 ## Vanilla parity
 
@@ -39,30 +39,30 @@ Vanilla defines observable behavior and outcomes, not a required internal algori
 ### Porting
 
 - Start from the vanilla entry point and follow the whole call chain, including every override in the class hierarchy and whatever the base class later does with the fields you set. Porting only the top method is the most common way a port ends up "almost right".
-- Look for implicit behaviour. A vanilla call can have side effects its Pumpkin counterpart doesn't, such as loading a chunk on a block read. Code that depends on those side effects has to do them explicitly in Pumpkin.
-- Check ordering around early returns. If your port returns early (a cancel, a deflect, a dodge), list what the surrounding Pumpkin function already did before that point (stats, cooldowns, events, sounds) and compare it with where vanilla does each one.
+- Look for implicit behaviour. A vanilla call can have side effects its LithumMC counterpart doesn't, such as loading a chunk on a block read. Code that depends on those side effects has to do them explicitly in LithumMC.
+- Check ordering around early returns. If your port returns early (a cancel, a deflect, a dodge), list what the surrounding LithumMC function already did before that point (stats, cooldowns, events, sounds) and compare it with where vanilla does each one.
 - Check what you delete. When you replace old code with a more faithful version, make sure nothing the old code did along the way gets lost. Vanilla often does that side effect in a different method, so matching the new method against vanilla doesn't prove the side effect is still there.
 - Check who else calls the code you changed. Shared entity, world and networking code has many callers, and a fix that's right for one of them can change the others.
 - Know what the client simulates. The client predicts some state itself, so sending the server's copy back to the same player fights the prediction. Check who vanilla actually sends each update to.
-- Translate values, don't copy the numbers. Flags, levels and enums have Pumpkin equivalents, and they don't always have the same numeric values as vanilla. Look up the Pumpkin constant instead of pasting the Java literal.
+- Translate values, don't copy the numbers. Flags, levels and enums have LithumMC equivalents, and they don't always have the same numeric values as vanilla. Look up the LithumMC constant instead of pasting the Java literal.
 - Before you start, search open issues and PRs. Some areas already have a planned design (mob AI, for example), and a port that works around it won't be accepted. If someone already has a nearly identical PR open, report that instead of building another one.
 
 If you couldn't check part of a port against vanilla, say which part in the PR.
 
 ## Game data and constants
 
-Block and item properties, entity dimensions, tags, recipes, loot tables, sounds and similar values come from `pumpkin-data`, which is generated from the JSON in `assets/`. That JSON is produced by the [Extractor](https://github.com/Pumpkin-MC/Extractor), a Fabric mod that dumps data from the running game. Hardcoded copies go stale on the next Minecraft update, which is why reviewers reject them.
+Block and item properties, entity dimensions, tags, recipes, loot tables, sounds and similar values come from `lithummc-data`, which is generated from the extracted Minecraft data in `assets/`. Hardcoded copies go stale on the next Minecraft update, which is why reviewers reject them.
 
-- If the value is in `assets/` but not generated yet, extend `tools/pumpkin-codegen` and regenerate.
+- If the value is in `assets/` but not generated yet, extend `tools/lithummc-codegen` and regenerate.
 - If the value isn't in `assets/` at all, it belongs in the Extractor, so prepare a change there as well. The same pull request rules apply to it.
 - Values that vanilla hardcodes as `static final` constants in Java code stay as named Rust constants, using the Java name. Don't try to extract those.
 - Don't guess engine values either, like a world height or a dimension's limits. Datapacks can change them, so read them from where the game defines them.
 
-Regenerate with `cargo run --locked -p pumpkin-codegen` and never edit `crates/pumpkin-data/src/generated/` by hand.
+Regenerate with `cargo run --locked -p lithummc-codegen` and never edit `crates/lithummc-data/src/generated/` by hand.
 
 ## Where things get wired up
 
-Paths are under `crates/pumpkin-core/src/`. Forgetting to register a new implementation is a common mistake, so copy the wiring of the closest existing example.
+Paths are under `crates/lithummc-core/src/`. Forgetting to register a new implementation is a common mistake, so copy the wiring of the closest existing example.
 
 | Adding          | Example to follow                | Register in                                                                  |
 | :-------------- | :------------------------------- | :--------------------------------------------------------------------------- |
@@ -76,7 +76,7 @@ Paths are under `crates/pumpkin-core/src/`. Forgetting to register a new impleme
 Things that aren't obvious from the code:
 
 - `BlockBehaviour`, `ItemBehaviour` and `Goal` methods are synchronous.
-- `#[pumpkin_block(...)]` generates `BlockMetadata`. Mobs get `EntityBase` and `NBTStorage` through blanket impls, so mob NBT goes in `mob_write_nbt` / `mob_read_nbt`.
+- `#[lithummc_block(...)]` generates `BlockMetadata`. Mobs get `EntityBase` and `NBTStorage` through blanket impls, so mob NBT goes in `mob_write_nbt` / `mob_read_nbt`.
 - A block entity's `write_internal()` already writes `id`, `x`, `y` and `z`. `write_nbt()` only writes its own fields.
 
 ## Mob AI and entity islands
@@ -94,11 +94,11 @@ Read [Mob AI in CONTRIBUTING.md](CONTRIBUTING.md#mob-ai) before changing goals, 
 
 ## Plugin API
 
-This section covers changes to the plugin API inside this repo. How to write a plugin is documented in `pumpkin-plugin-api`, not here.
+This section covers changes to the plugin API inside this repo. How to write a plugin is documented in `lithummc-plugin-api`, not here.
 
-- **Mind the licenses.** The server is GPL-3.0, but `pumpkin-plugin-api`, `pumpkin-plugin-wit` and `pumpkin-plugin-utils` are MIT OR Apache-2.0. Don't move or copy server code into those crates. Plugin authors depend on them under the permissive license.
-- **The WIT is public.** `crates/pumpkin-plugin-wit` is mirrored to its own repository on every push to `master`, and bindings for other languages are generated from it. A breaking change there breaks SDKs outside this repo too. Prefer additive changes, and call out anything breaking in the PR.
-- **Change the layers together.** A WIT change also needs the host implementation for that API version (`crates/pumpkin-wasm-host-v0_1/` or `crates/pumpkin-wasm-host-v0_2/`, which each generate their own bindings; shared code is in `crates/pumpkin-wasm-host-common/`), the SDK (`pumpkin-plugin-api`) and sometimes the runtime (`pumpkin-plugin-runtime`). Run `cargo run --locked -p pumpkin-codegen -- wit` afterwards, because WIT data and packet mappings are generated. The v0.2 host is behind the `plugin-v0_2` feature of `pumpkin`, which stays off until the v0.2 ABI is finished; pass `--features plugin-v0_2` to build, run or test the server with it. Breaking changes to the native plugin API bump `PLUGIN_API_VERSION` in `plugin/mod.rs`.
+- **Mind the licenses.** The server is GPL-3.0, but `lithummc-plugin-api`, `lithummc-plugin-wit` and `lithummc-plugin-utils` are MIT OR Apache-2.0. Don't move or copy server code into those crates. Plugin authors depend on them under the permissive license.
+- **The WIT is public.** `crates/lithummc-plugin-wit` is mirrored to its own repository on every push to `master`, and bindings for other languages are generated from it. A breaking change there breaks SDKs outside this repo too. Prefer additive changes, and call out anything breaking in the PR.
+- **Change the layers together.** A WIT change also needs the host implementation for that API version (`crates/lithummc-wasm-host-v0_1/` or `crates/lithummc-wasm-host-v0_2/`, which each generate their own bindings; shared code is in `crates/lithummc-wasm-host-common/`), the SDK (`lithummc-plugin-api`) and sometimes the runtime (`lithummc-plugin-runtime`). Run `cargo run --locked -p lithummc-codegen -- wit` afterwards, because WIT data and packet mappings are generated. The v0.2 host is behind the `plugin-v0_2` feature of `lithummc`, which stays off until the v0.2 ABI is finished; pass `--features plugin-v0_2` to build, run or test the server with it. Breaking changes to the native plugin API bump `PLUGIN_API_VERSION` in `plugin/mod.rs`.
 - **Keep events working.** When you port gameplay that a plugin could want to observe or cancel, check whether an event for it already exists in `plugin/api/events/`. If it does, keep its contract: fire it at the same point existing callers do, fill in the same payload, and if it's cancellable, skip the effect when `cancelled()` returns true. Look at how the event is fired elsewhere before wiring it up. A port that skips an existing event silently breaks every plugin that relied on it.
 
 ## Code quality
@@ -108,7 +108,7 @@ Maintainers and CodeRabbit read every diff line by line, and they read ports nex
 ### Fit in with the code around you
 
 - Copy the closest existing code in the same area: how it's registered, how it implements its traits, how it reaches world and entity APIs, how it handles errors and lays out imports. A second pattern for the same job is harder to maintain than a slightly imperfect one used everywhere.
-- Keep vanilla names and recognizable method boundaries where they help source review. Prefer a named helper on the matching Pumpkin type to inlining ported math. A different internal design is acceptable when the observable behavior remains equivalent.
+- Keep vanilla names and recognizable method boundaries where they help source review. Prefer a named helper on the matching LithumMC type to inlining ported math. A different internal design is acceptable when the observable behavior remains equivalent.
 - Names say what the thing is. Keep vanilla's names for ported concepts so they can be searched for in the Java.
 
 ### Don't repeat yourself
@@ -166,7 +166,7 @@ typos
 
 Passing clippy and tests doesn't show that a gameplay change works. Run the server and exercise the change before you call it done:
 
-- **Boot test.** Start the server in a scratch directory (`cargo run --manifest-path <repo>/Cargo.toml -p pumpkin` from that directory, because the server writes config and world files into the working directory). Wait for the "done" line in the log. Send console commands over stdin to reach the feature. Stop it with `stop`. Then read the log for panics, errors and warnings your change added. Use debug builds: the release profile uses fat LTO and takes many times longer to build.
+- **Boot test.** Start the server in a scratch directory (`cargo run --manifest-path <repo>/Cargo.toml -p lithummc` from that directory, because the server writes config and world files into the working directory). Wait for the "done" line in the log. Send console commands over stdin to reach the feature. Stop it with `stop`. Then read the log for panics, errors and warnings your change added. Use debug builds: the release profile uses fat LTO and takes many times longer to build.
 - **Bots.** Log a headless client in for anything that needs a player: movement, chunk loading, combat, inventories, packets. [Mineflayer](https://github.com/PrismarineJS/mineflayer) is scriptable and good for "walk here, use this item, check the block". [rust-mc-bot](https://github.com/Eoghanmc22/rust-mc-bot) is good for load tests with many players. Bot libraries often lag behind the newest protocol, so check which version the bot supports first. If no bot supports it, don't turn that into a side project: do the checks you can and list the rest for the human to test in-game.
 - **Load and memory.** For performance or memory changes, run the same bot scenario (same seed, bot count, view distance and duration) on `master` and on your branch. Record MSPT or peak memory for both. One run each isn't enough when the numbers are close.
 - **Counters over guesses.** When you're chasing a bug, add temporary counters or `tracing` output to prove the cause before changing code. Take the instrumentation out before committing.
@@ -194,7 +194,7 @@ Don't write tests that:
 - Mock so much that nothing real is left to test.
 - Duplicate an existing test with slightly different numbers.
 
-Size new tests like the ones next to them: usually one focused test per behaviour, in the same place the module already keeps its tests. Scratch checks you wrote while working are for you. Delete them, unless one turns out to be a real regression test that fits the list above. When a change can't be tested meaningfully in code, say so and describe the boot, bot or in-game check you did instead. Behaviour that needs a real world belongs in `pumpkin-gametest`.
+Size new tests like the ones next to them: usually one focused test per behaviour, in the same place the module already keeps its tests. Scratch checks you wrote while working are for you. Delete them, unless one turns out to be a real regression test that fits the list above. When a change can't be tested meaningfully in code, say so and describe the boot, bot or in-game check you did instead. Behaviour that needs a real world belongs in `lithummc-gametest`.
 
 ### Performance
 

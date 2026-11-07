@@ -73,19 +73,19 @@ RUST_CI_IGNORED_FILES = {
     "assets/bedrock/README.md",
     "default.nix",
     "docker-compose.yml",
-    "egg-pumpkin.json",
+    "egg-lithummc.json",
     "flake.lock",
     "flake.nix",
     "shell.nix",
     "typos.toml",
 }
 
-WIT_ROOT = Path("crates/pumpkin-plugin-wit")
+WIT_ROOT = Path("crates/lithummc-plugin-wit")
 # Crates that generate Rust bindings from the WIT files; their dependents follow from the closure.
 WIT_CONSUMER_PACKAGES = {
-    "pumpkin-plugin-api",
-    "pumpkin-wasm-host-v0_1",
-    "pumpkin-wasm-host-v0_2",
+    "lithummc-plugin-api",
+    "lithummc-wasm-host-v0_1",
+    "lithummc-wasm-host-v0_2",
 }
 
 
@@ -252,7 +252,7 @@ def plan(args: argparse.Namespace) -> None:
         run_full = True
         should_check_wit = True
         reason = {
-            "push": "Pushed to master",
+            "push": "Pushed to main",
             "workflow_dispatch": "Started manually",
         }.get(args.event, f"Triggered by {args.event.replace('_', ' ')}")
 

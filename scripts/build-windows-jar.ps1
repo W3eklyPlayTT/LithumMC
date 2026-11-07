@@ -20,15 +20,15 @@ if (-not (Test-Path -LiteralPath $cargo -PathType Leaf)) {
 
 Push-Location $repoRoot
 try {
-    & $cargo build --release --locked --package pumpkin --bin lithum-server
+    & $cargo build --release --locked --package lithummc --bin lithummc-server
     if ($LASTEXITCODE -ne 0) {
-        throw "The Lithum Windows server build failed with exit code $LASTEXITCODE."
+        throw "The LithumMC Windows server build failed with exit code $LASTEXITCODE."
     }
 
     $outputDirectory = Join-Path $repoRoot "dist"
     New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
-    Copy-Item -LiteralPath (Join-Path $targetDirectory "release\lithum-server.exe") `
-        -Destination (Join-Path $outputDirectory "lithum-server.exe") -Force
+    Copy-Item -LiteralPath (Join-Path $targetDirectory "release\lithummc-server.exe") `
+        -Destination (Join-Path $outputDirectory "lithummc-server.exe") -Force
 
     & (Join-Path $PSScriptRoot "package-jar.ps1")
     if ($LASTEXITCODE -ne 0) {

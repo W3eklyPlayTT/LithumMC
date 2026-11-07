@@ -1,0 +1,62 @@
+name: Build LithumMC Linux server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - Cargo.toml
+      - Cargo.lock
+      - crates/**
+      - .github/workflows/lithummc-linux.yml
+      - jar-launcher/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-linux-x86_64:
+    name: Linux x86_64 server
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Select stable Rust
+        run: rustup update stable && rustup default stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: lithummc-linux-x86_64
+
+      - name: Build optimized server
+        run: cargo build --locked --release --package lithummc --bin lithummc-server
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Package Linux executable and hosting JAR
+        run: |
+          mkdir -p dist
+          install -m 755 target/release/lithummc-server dist/lithummc-server-linux-x86_64
+          sha256sum dist/lithummc-server-linux-x86_64 > dist/lithummc-server-linux-x86_64.sha256
+          mkdir -p target/lithummc-jar-stage/native
+          javac -d target/lithummc-jar-stage jar-launcher/LithumMCLauncher.java
+          cp target/release/lithummc-server target/lithummc-jar-stage/native/lithummc-server-linux-x86_64
+          jar --create --file dist/LithumMC.jar --manifest jar-launcher/MANIFEST.MF -C target/lithummc-jar-stage .
+          sha256sum dist/LithumMC.jar > dist/LithumMC.jar.sha256
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: LithumMC-linux-x86_64
+          path: |
+            dist/lithummc-server-linux-x86_64
+            dist/lithummc-server-linux-x86_64.sha256
+            dist/LithumMC.jar
+            dist/LithumMC.jar.sha256
+          retention-days: 90

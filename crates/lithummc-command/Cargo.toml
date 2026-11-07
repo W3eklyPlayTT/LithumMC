@@ -1,0 +1,21 @@
+[package]
+name = "lithummc-command"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+lithummc-util.workspace = true
+lithummc-protocol = { workspace = true, features = ["default"] }
+lithummc-data = { workspace = true, features = ["default"] }
+lithummc-nbt.workspace = true
+lithummc-codecs.workspace = true
+
+uuid.workspace = true
+rustc-hash.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true

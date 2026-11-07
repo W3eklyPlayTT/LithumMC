@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: dev.lithum.LithumLauncher
+Main-Class: dev.lithummc.LithumMCLauncher
